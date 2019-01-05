@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+	{% block head %}
+		<meta charset="utf-8">
+		<title>{% block title %}{{ title }}{% endblock title %}</title>
+		<link rel="stylesheet" type="text/css" href="{{ theme.path }}css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="{{ theme.path }}css/main.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/rainbow.min.css">
+		<script src="{{ theme.path }}/highlight.pack.js"></script>
+		{% for name in tags %}
+			<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/{{ name }}.min.js"></script>
+		{% endfor %}
+	{% endblock head %}
+</head>
+<body>
+<div id="page">
+	<nav class="main">
+		<header class="main">
+			{% block header %}
+				<h1><a href="{{ rootpath }}index.html">www.cecton.com</a></h1>
+			{% endblock header %}
+		</header>
+		{% include "_menu.html" %}
+	</nav>
+
+	<section class="main">
+		{% block main %}{{ body }}{% endblock main %}
+	</section>
+</div>
+<script>hljs.initHighlighting();</script>
+</body>
+</html>

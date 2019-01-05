@@ -1,0 +1,4 @@
+[build]
+base = "."
+publish = "build"
+command = "curl -sL -o strange https://bitbucket.org/Alex_PK/strange/downloads/strange-0.8.1-linux-amd64 && chmod +x strange && ./strange build"
