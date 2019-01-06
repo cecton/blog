@@ -1,7 +1,7 @@
 # Strange configuration file
 site:
   # The title of the site. It will be used in the <title> and possibly in some plugins
-  title: www.cecton.com
+  title: cecton's blog
 
   # The URL of the website. Do not append "/index.html" at the end.
   url: https://www.cecton.com

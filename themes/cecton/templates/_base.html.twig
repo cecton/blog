@@ -19,8 +19,9 @@
 <div id="page">
 	<nav class="main">
 		<header class="main">
+			<a class="menu-icon" href="#">&#9776</a>
 			{% block header %}
-				<h1><a href="{{ rootpath }}index.html">www.cecton.com</a></h1>
+				<h1><a href="{{ rootpath }}index.html">cecton's blog</a></h1>
 			{% endblock header %}
 		</header>
 		{% include "_menu.html" %}
@@ -31,5 +32,13 @@
 	</section>
 </div>
 <script>hljs.initHighlighting();</script>
+<script>
+var i = document.querySelector(".menu-icon");
+var m = document.querySelector("nav.main");
+i.addEventListener('click', function(ev) {
+m.classList.toggle("menu-open");
+ev.preventDefault();
+})
+</script>
 </body>
 </html>
