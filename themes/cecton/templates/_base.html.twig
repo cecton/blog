@@ -9,7 +9,9 @@
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/rainbow.min.css">
 		<script src="{{ theme.path }}/highlight.pack.js"></script>
 		{% for name in tags %}
-			<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/{{ name }}.min.js"></script>
+			{% if site.data.languages.lang is containing(name) %}
+				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/{{ name }}.min.js"></script>
+			{% endif %}
 		{% endfor %}
 	{% endblock head %}
 </head>
