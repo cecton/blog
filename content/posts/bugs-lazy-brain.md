@@ -86,5 +86,5 @@ the time to the person who is going to debug your code.
 
 Last and not least: the lazy brain is only one part of the bug problem. There
 are many other aspects that are actually involved in the high number of bugs
-and knowledge and better design patterns are no server bullets. Actually, in
+and knowledge and better design patterns are no silver bullets. Actually, in
 some cases, it even helps introducing new problems like overengineering.
