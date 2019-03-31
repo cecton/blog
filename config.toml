@@ -1,0 +1,18 @@
+baseURL = "http://cecton.com/"
+languageCode = "en-us"
+title = "cecton's blog"
+theme = "m10c"
+
+[params]
+  author = "Cecile Tonglet"
+  description = "CTO of a startup that helps people. I'm also helping the mayflies to reach the Bridge of Shadows alive. 🦀 Rustacean"
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/cecton"
+
+  [[params.social]]
+    name = "twitter"
+    url = "https://twitter.com/CecileTonglet"
+
+  [params.style]
+    primaryColor = "#da6565"
