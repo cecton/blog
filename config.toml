@@ -21,7 +21,7 @@ theme = "m10c"
 
   [[params.social]]
     name = "email"
-    url = "blog@cecton.com"
+    url = "mailto:blog@cecton.com"
 
   [params.style]
     primaryColor = "#da6565"
