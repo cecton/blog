@@ -2,10 +2,6 @@
 title: "Bugs & Lazy Brain"
 date: 2019-03-31T14:31:46+02:00
 ---
-
-Bugs & Lazy Brain
-=================
-
 Why is it a problem in software engineering?
 --------------------------------------------
 
