@@ -19,7 +19,7 @@ theme = "m10c"
     name = "linkedin"
     url = "https://www.linkedin.com/in/cecton/"
 
-  [[params.email]]
+  [[params.social]]
     name = "email"
     url = "blog@cecton.com"
 
