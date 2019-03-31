@@ -19,9 +19,5 @@ theme = "m10c"
     name = "linkedin"
     url = "https://www.linkedin.com/in/cecton/"
 
-  [[params.social]]
-    name = "email"
-    url = "mailto:blog@cecton.com"
-
   [params.style]
     primaryColor = "#da6565"
