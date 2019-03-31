@@ -1,7 +1,6 @@
 ---
 title: "Bugs & Lazy Brain"
 date: 2019-03-31T14:31:46+02:00
-draft: true
 ---
 
 Bugs & Lazy Brain
