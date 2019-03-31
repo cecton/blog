@@ -12,12 +12,16 @@ theme = "m10c"
     url = "https://github.com/cecton"
 
   [[params.social]]
-    name = "gitlab"
-    url = "https://gitlab.com/cecton"
-
-  [[params.social]]
     name = "twitter"
     url = "https://twitter.com/CecileTonglet"
+
+  [[params.social]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/cecton/"
+
+  [[params.email]]
+    name = "email"
+    url = "blog@cecton.com"
 
   [params.style]
     primaryColor = "#da6565"
