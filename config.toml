@@ -1,4 +1,4 @@
-baseURL = "http://cecton.com/"
+baseURL = "https://nervous-darwin-093b83.netlify.com"
 languageCode = "en-us"
 title = "cecton's blog"
 theme = "m10c"
