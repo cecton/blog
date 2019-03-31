@@ -80,8 +80,8 @@ but we often forget how you achieve this: by keeping learning new things and
 new ways. Not everything you will learn will be good, but at least it will give
 you more understanding and more choices in the future.
 
-How to avoid bugs?
-------------------
+Is it the perfect solution to avoid bugs?
+-----------------------------------------
 
 First things first, you need to acknowledge that you won't be able to produce
 perfect code all the time. Of course you are doing your best to produce
@@ -94,4 +94,7 @@ before committing and pushing code. Of course learning has a cost in
 development time but one of the best consequences is that you are going to save
 the time to the person who is going to debug your code.
 
-
+Last and not least: the lazy brain is only one part of the bug problem. There
+are many other aspects that are actually involved in the high number of bugs
+and knowledge and better design patterns are no server bullets. Actually, in
+some cases, it even helps introducing new problems like overengineering.
