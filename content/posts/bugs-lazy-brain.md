@@ -73,7 +73,7 @@ you more understanding and more choices in the future.
 Is it the perfect solution to avoid bugs?
 -----------------------------------------
 
-First things first, you need to acknowledge that you won't be able to produce
+First things first, you need to accept that you won't be able to produce
 perfect code all the time. Of course you are doing your best to produce
 bug-free code but remember that this won't happen in real life.
 
