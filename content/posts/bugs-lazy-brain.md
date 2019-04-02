@@ -10,7 +10,7 @@ have as many bugs as we have in software? It would be ridiculously bad: a car
 would refuse to start when it encounters a division by zero, your fridge would
 just stop working because it lost connection to Internet, etc... We do not
 tolerate bugs in those devices, yet, in software engineering, we have learned
-to accept them and cope with them in our planning.
+to accept them and cope with them in our plannings.
 
 Where bugs come from?
 ---------------------
@@ -77,12 +77,13 @@ First things first, you need to accept that you won't be able to produce
 perfect code all the time. Of course you are doing your best to produce
 bug-free code but remember that this won't happen in real life.
 
-The second important point is that you need to acknowledge your own ignorance
-to put yourself in a constantly learning mindset. When you are in a learning
-mindset you are continuously seeking to understand and know what you are doing
-before committing and pushing code. Of course learning has a cost in
-development time but one of the best consequences is that you are going to save
-the time to the person who is going to debug your code.
+The second important point (and the whole point of this blog post) is that you
+need to acknowledge your own ignorance to put yourself in a constantly learning
+mindset. When you are in a learning mindset you are continuously seeking to
+understand and know what you are doing before committing and pushing code. Of
+course learning has a cost in development time but one of the best consequences
+is that you are going to save the time to the person who is going to debug your
+code.
 
 Last and not least: the lazy brain is only one part of the bug problem. There
 are many other aspects that are actually involved in the high number of bugs
