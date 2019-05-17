@@ -9,7 +9,8 @@ To quote Bryan Cantrill:
 
 > "[Engineers] want to solve hard, commercially relevant problems, with people
 > that inspire us, achieving a mission that we believe in."
- - [Surge 2013 Speaker: Bryan Cantrill](https://www.youtube.com/watch?v=1KeYzjILqDo)
+>
+> -- [Surge 2013 Speaker: Bryan Cantrill](https://www.youtube.com/watch?v=1KeYzjILqDo)
 
 One would we be tempted to think that giving the best best practices, best
 design choices and making the smartest choices would be the way to go to
@@ -39,7 +40,8 @@ Postmortems and growth
 
 > "The way we should scale is by finding the fewest number of the best software
 > engineers."
- - [Surge 2013 Speaker: Bryan Cantrill](https://www.youtube.com/watch?v=1KeYzjILqDo)
+>
+> -- [Surge 2013 Speaker: Bryan Cantrill](https://www.youtube.com/watch?v=1KeYzjILqDo)
 
 You can't really find the best software engineers by improving the technical
 interview. You need to create the talented engineers that you seek. Highly
