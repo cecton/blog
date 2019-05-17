@@ -7,16 +7,16 @@ What motivates engineers
 
 To quote Bryan Cantrill:
 
-> "[Engineers] want to solve hard, commercially relevant problems, with people
-> that inspire us, achieving a mission that we believe in."
+> *"[Engineers] want to solve hard, commercially relevant problems, with people
+> that inspire us, achieving a mission that we believe in."*
 >
 > -- [Surge 2013 Speaker: Bryan Cantrill](https://www.youtube.com/watch?v=1KeYzjILqDo)
 
 One would we be tempted to think that giving the best best practices, best
 design choices and making the smartest choices would be the way to go to
 inspire others. But to be really inspirational you actually need to do the
-exact opposite: empowering people to choose *their* best practices, make
-*their* design choices and above everything: don't think for a single second
+exact opposite: empowering people to choose **their** best practices, make
+**their** design choices and above everything: don't think for a single second
 that your choices are the smartest ones, let the people decide what is the
 smart thing to do. It's your team who needs to feel smart, not you.
 
@@ -38,8 +38,8 @@ they are part of the company.
 Postmortems and growth
 ----------------------
 
-> "The way we should scale is by finding the fewest number of the best software
-> engineers."
+> *"The way we should scale is by finding the fewest number of the best software
+> engineers."*
 >
 > -- [Surge 2013 Speaker: Bryan Cantrill](https://www.youtube.com/watch?v=1KeYzjILqDo)
 
