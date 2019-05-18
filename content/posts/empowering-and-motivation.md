@@ -5,8 +5,6 @@ date: 2019-05-17T15:27:00+02:00
 What motivates engineers
 ------------------------
 
-To quote Bryan Cantrill:
-
 > *"[Engineers] want to solve hard, commercially relevant problems, with people
 > that inspire us, achieving a mission that we believe in."*
 >
