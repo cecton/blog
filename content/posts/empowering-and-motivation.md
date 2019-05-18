@@ -12,7 +12,7 @@ To quote Bryan Cantrill:
 >
 > -- [Surge 2013 Speaker: Bryan Cantrill](https://www.youtube.com/watch?v=1KeYzjILqDo)
 
-One would we be tempted to think that giving the best best practices, best
+One would be tempted to think that giving the best best practices, best
 design choices and making the smartest choices would be the way to go to
 inspire others. But to be really inspirational you actually need to do the
 exact opposite: empowering people to choose **their** best practices, make
@@ -24,8 +24,8 @@ Of course sharing your own experience as a software engineer is always useful
 but you need to resist the urge to decide for your team. Let the team decide,
 let it fail if necessary, so it can learn and get better.
 
-What happens when you don't empower your team?
-----------------------------------------------
+What happens when you don't empower your team
+---------------------------------------------
 
 If the people who work on the project cannot take decision, they lose ownership
 on the code. Losing ownership will eventually lead to a lost of motivation and
