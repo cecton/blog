@@ -14,13 +14,14 @@ One would be tempted to think that giving the best best practices, best
 design choices and making the smartest choices would be the way to go to
 inspire others. But to be really inspirational you actually need to do the
 exact opposite: empowering people to choose **their** best practices, make
-**their** design choices and above everything: don't think for a single second
-that your choices are the smartest ones, let the people decide what is the
-smart thing to do. It's your team who needs to feel smart, not you.
+**their** design choices and above everything else: don't think for a single
+second that your choices are the smartest ones, let the people decide what is
+the smart thing to do. It's your team who needs to feel smart, not you.
 
 Of course sharing your own experience as a software engineer is always useful
 but you need to resist the urge to decide for your team. Let the team decide,
-let it fail if necessary, so it can learn and get better.
+let it fail if necessary, so it can learn and get better (or you can learn and
+get better).
 
 > *"What makes a great manager isn't the problems they solve, but the questions
 > they ask."*
@@ -61,8 +62,8 @@ will never be tested. Always go for it if you can. My own personal gold rule
 is: if it's safe to try, let's do it. Either the result will be good, or it
 will be an experience.
 
-Disclaimer: what happens when you don't empower your team
----------------------------------------------------------
+What happens when you don't empower your team
+---------------------------------------------
 
 If the people who work on the project cannot take decision, they lose ownership
 on the code. Losing ownership will eventually lead to a lost of motivation and
