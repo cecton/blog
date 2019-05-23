@@ -5,6 +5,14 @@ date: 2019-05-17T15:27:00+02:00
 What motivates engineers
 ------------------------
 
+Recently I have come to realize that there are plenty of great engineers
+everywhere, but most of them are not allowed to shine in their job because of
+bad (or missing) company culture, wrong interview process, bad management,
+etc... In order to create a team of talented people, I believe you need to
+create a great company culture by: empowering them and allowing them to grow.
+Highly motivated people are capable to learn and improve much more faster than
+average.
+
 > *"[Engineers] want to solve hard, commercially relevant problems, with people
 > that inspire us, achieving a mission that we believe in."*
 >
@@ -28,16 +36,13 @@ get better).
 >
 > -- [Don't solve the problem by Claire Lew](https://getpocket.com/a/read/2540741721)
 
+Never leave anyone in your team helpless with the impression that their ideas
+will never be tested. Always go for it if you can. My own personal gold rule
+is: if it's safe to try, let's do it. Either the result will be good, or it
+will be an experience.
+
 Postmortems and growth
 ----------------------
-
-Recently I have come to realize that there are plenty of great engineers
-everywhere, but most of them are not allowed to shine in their job because of
-bad (or missing) company culture, wrong interview process, bad management,
-etc... In order to create a team of talented people, I believe you need to
-create a great company culture by: empowering them and allowing them to grow.
-Highly motivated people are capable to learn and improve much more faster than
-average.
 
 As we are all learning from our mistakes, your team (including you) is going to
 learn a lot also from their mistakes. That is why doing a blameless postmortem
@@ -53,14 +58,6 @@ is a risk to allow strong opinions to be loosely held.
 > any data to back it up*
 >
 > -- [Strong Opinions Loosely Held Might be the Worst Idea in Tech by Michael Natkin](https://blog.glowforge.com/strong-opinions-loosely-held-might-be-the-worst-idea-in-tech/)
-
-If it's safe to try, just do it
--------------------------------
-
-Never leave anyone in your team helpless with the impression that their ideas
-will never be tested. Always go for it if you can. My own personal gold rule
-is: if it's safe to try, let's do it. Either the result will be good, or it
-will be an experience.
 
 What happens when you don't empower your team
 ---------------------------------------------
