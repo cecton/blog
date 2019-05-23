@@ -59,8 +59,8 @@ is a risk to allow strong opinions to be loosely held.
 >
 > -- [Strong Opinions Loosely Held Might be the Worst Idea in Tech by Michael Natkin](https://blog.glowforge.com/strong-opinions-loosely-held-might-be-the-worst-idea-in-tech/)
 
-What happens when you don't empower your team
----------------------------------------------
+What happens when you empower your team & when you don't
+--------------------------------------------------------
 
 If the people who work on the project cannot take decision, they lose ownership
 on the code. Losing ownership will eventually lead to a lost of motivation and
