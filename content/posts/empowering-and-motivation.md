@@ -37,7 +37,7 @@ get better).
 > *"What makes a great manager isn't the problems they solve, but the questions
 > they ask."*
 >
-> -- [Don't solve the problem by Claire Lew](https://getpocket.com/a/read/2540741721)
+> -- [Don't solve the problem by Claire Lew](https://m.signalvnoise.com/dont-solve-the-problem/)
 
 Never leave anyone in your team helpless with the impression that their ideas
 will never be tested. Always go for it if you can. My own personal gold rule
