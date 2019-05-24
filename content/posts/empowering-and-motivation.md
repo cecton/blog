@@ -2,8 +2,8 @@
 title: "Empowering the People & Motivation"
 date: 2019-05-17T15:27:00+02:00
 ---
-What motivates engineers
-------------------------
+How to get a team of talented engineers?
+----------------------------------------
 
 Recently I have come to realize that there are plenty of great engineers
 everywhere, but most of them are not allowed to shine in their job because of
@@ -12,6 +12,9 @@ etc... In order to create a team of talented people, I believe you need to
 create a great company culture by: empowering them and allowing them to grow.
 Highly motivated people are capable to learn and improve much more faster than
 average.
+
+What motivates engineers
+------------------------
 
 > *"[Engineers] want to solve hard, commercially relevant problems, with people
 > that inspire us, achieving a mission that we believe in."*
