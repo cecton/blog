@@ -34,8 +34,8 @@ you need to be comfortable with the command line.
 tests.
 
 
-1. The easy solution
---------------------
+(1) The easy solution
+---------------------
 
 Go on [https://www.vb-audio.com/](https://www.vb-audio.com/) and install the
 [Voicemeeter](https://www.vb-audio.com/Voicemeeter/index.htm) (under "Audio
@@ -68,8 +68,8 @@ probably need to change the microphone device used by the application using the
 Windows control panel and select the "Voicemeeter" one. There is a panel "App
 volume and device preferences" somewhere in the control panel of Windows.
 
-2. The complete solution
-------------------------
+(2) The complete solution
+-------------------------
 
 If you have installed the Voicemeeter of the previous tutorial, uninstall it
 and reboot.
