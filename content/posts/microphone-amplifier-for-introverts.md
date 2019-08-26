@@ -84,7 +84,7 @@ Go on [http://sox.sourceforge.net/](http://sox.sourceforge.net/) and install
 Open the command line, go to the directory and use this command to stream
 without modification the sound of your microphone to your headset:
 
-```
+```none
 sox.exe -t waveaudio "Microphone (USB PnP Audio Device)" -t waveaudio "Speakers (2- Schiit Modi 3)"
 ```
 
@@ -94,7 +94,7 @@ own microphone and the name of your headset by your own headset.
 Now we can add filters at the end of the command line to downmix the channels
 to 1 channel (it improves a bit the volume) and increase the volume:
 
-```
+```none
 sox.exe -t waveaudio "..." -t waveaudio "..." channels 1 vol 30db
 ```
 
@@ -105,7 +105,7 @@ When you are satisfied with the result, change the output audio device to
 "CABLE Input (VB-Audio Virtual Cable)" (the name might be slightly different
 but you should be able to find it easily) and the command will look like this:
 
-```
+```none
 sox.exe -t waveaudio "Microphone (...)" -t waveaudio "CABLE Input (VB-Audio Virtual Cable)" channels 1 vol 30db
 ```
 
@@ -121,7 +121,7 @@ that, you will first need to create a noise profile. Make sure your room is
 completely silent, make no noise at all, and start the profiling with this
 command:
 
-```
+```none
 sox.exe -t waveaudio "Microphone (...)" -n channels 1 vol 30 noiseprof noise.prof
 ```
 
@@ -129,7 +129,7 @@ Press Ctrl-C to stop the recording. A file `noise.prof` should appear in the
 current working directory. You can now test the noise reduction with this
 command:
 
-```
+```none
 sox.exe -t waveaudio "Microphone (...)" -t waveaudio "Speakers (...)" channels 1 vol 30db noisered noise.prof 0.3
 ```
 
