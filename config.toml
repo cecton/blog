@@ -5,7 +5,7 @@ theme = "m10c"
 
 [params]
   author = "Cecile Tonglet"
-  description = "CTO of a startup that helps people. I'm also helping the mayflies to reach the Bridge of Shadows alive. 🦀 Rustacean"
+  description = "Ex-CTO of a startup that helps people. I'm also helping the mayflies to reach the Bridge of Shadows alive. 🦀 Rustacean"
 
   [[params.social]]
     name = "github"
