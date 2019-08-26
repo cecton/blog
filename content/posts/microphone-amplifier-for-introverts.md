@@ -11,10 +11,9 @@ for Windows users but I expect I will soon find out how to do the same on
 Linux. I don't own a computer on OSX so if someone wants to add their tutorial
 here, feel free to do send me an email.
 
-You must probably want to ask me: why not just turn the microphone sensitivity
-higher. The problem is that it would capture more surrounding sounds, and those
-sounds will be louder (depending on your microphone) than the solution proposed
-here.
+You're probably wondering why not just turn the microphone sensitivity higher.
+The problem is that it would capture more surrounding sounds, and those sounds
+will be louder (depending on your microphone) than the solution proposed here.
 
 Unfortunately I couldn't find a way to make sensible spectrogram to show the
 actual difference but I heavily tested this and people do hear a difference. I
