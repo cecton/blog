@@ -59,7 +59,7 @@ Getting Started Qwiickly
 
 If like me you don't want to spend too much time on the hardware and start the
 actual code. You can get a board with a "Qwiic" connector. This is some kind of
-universal connected with a special circuitry that will handle any voltage
+universal connector with a special circuitry that will handle any voltage
 adjustment for you. The only thing you need are devices with Qwiic connectors.
 They can be connected in serial so you can actually connect multiple of them.
 
