@@ -49,6 +49,12 @@ sometimes harder, frustrating and time-eater. In any case, at some point you
 and check the content of the
 [embedded Rust documentation](https://docs.rust-embedded.org/).
 
+My Own Hardware Choice
+----------------------
+
+ *  [SparkFun Qwiic Pro Micro - USB-C (ATmega32U4)](https://www.sparkfun.com/products/15795)
+ *  [Zio Qwiic OLED Display (1.5inch, 128x128)](https://www.sparkfun.com/products/15890)
+
 Getting Started Qwiickly
 ------------------------
 
