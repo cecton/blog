@@ -208,7 +208,7 @@ capable to flash the board in some cases. Hopefully you won't need that.)
 3.  Ok so I copied the command and I get this error. I can't even upload
     Arduino's own `.hex`:
 
-    ```
+    ```text
     Connecting to programmer: .avrdude: butterfly_recv(): programmer is not responding
 
     avrdude: butterfly_recv(): programmer is not responding
