@@ -5,7 +5,7 @@ theme = "m10c"
 
 [params]
   author = "Cecile Tonglet"
-  description = "Helping to build Web 3 | Proud Internet rando | 🦀 Rustacean | Avocado Advocate 🥑"
+  description = "Helping to build Web 3 | Proud Internet rando | 🦀 Rustacean"
 
   [[params.social]]
     name = "github"
