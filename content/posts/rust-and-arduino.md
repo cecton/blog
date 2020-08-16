@@ -45,7 +45,9 @@ It is a good habit to search the web the answers to your questions. I honestly
 find a great satisfaction when I find and learn things all by myself but it is
 sometimes harder, frustrating and time-eater. In any case, at some point you
 **will need** help and I would suggest to
-[join the avr-hal discussion channel](https://app.element.io/#/room/#rust-embedded:matrix.org).
+[join the rust-embedded discussion channel](https://app.element.io/#/room/#rust-embedded:matrix.org)
+and check the content of the
+[embedded Rust documentation](https://docs.rust-embedded.org/).
 
 Getting Started Qwiickly
 ------------------------
