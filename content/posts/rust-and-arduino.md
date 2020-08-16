@@ -186,6 +186,7 @@ command to flash with your Rust program should look like this:
 ```
 
 The important part of this command are:
+
  -  `-patmega32u4`: this is my microcontroller
  -  `-cavr109`: this`: this is the "programmer" (I know what is going to be
     your next question!)
