@@ -159,6 +159,12 @@ echo "$@" >> /tmp/avrdude.log
 **Note:** try to use the full path to the original executable to make sure that
 if the script is ran from a different directory it will still work.
 
+Make the file executable:
+
+```bash
+chmod +x ./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude
+```
+
 Now click on the upload button of the Arduino IDE again send see what has been
 saved in `/tmp/avrdude.log`:
 
