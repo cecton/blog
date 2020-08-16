@@ -54,8 +54,8 @@ and check the content of the
  *  [SparkFun Qwiic Pro Micro - USB-C (ATmega32U4)](https://www.sparkfun.com/products/15795)
  *  [Zio Qwiic OLED Display (1.5inch, 128x128)](https://www.sparkfun.com/products/15890)
 
-Getting Started Qwiickly
-------------------------
+Getting Started Vewy Qwiickly
+-----------------------------
 
 If like me you don't want to spend too much time on the hardware and start the
 actual code. You can get a board with a "Qwiic" connector. This is some kind of
@@ -63,9 +63,9 @@ universal connector with a special circuitry that will handle any voltage
 adjustment for you. The only thing you need are devices with Qwiic connectors.
 They can be connected in serial so you can actually connect multiple of them.
 
-Now to get a bit more in the details of what you need to know. This is an I2C
-connect. In the world of embedded development you may encounter 3 different
-kind of inter-device communication: UART, SPI and I2C. I'll drop
+Now to get a bit more into the details of what you need to know. This is an I2C
+connect or. In the world of embedded development you may encounter 3 different
+kinds of inter-device communication: UART, SPI and I2C. I'll drop
 [here](https://www.engineersgarage.com/tutorials/understanding-the-i2c-protocol/)
 a link to a very good documentation of I2C and its relation to the others. I'd
 suggest to read at least the beginning  to understand the differences between
