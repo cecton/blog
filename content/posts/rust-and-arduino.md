@@ -253,10 +253,10 @@ journey.
 
     In my case the procedure was not to long press the reset button but to
     press twice the reset button. I found that on the doc on the website of the
-    shop, just next to the tutorial somewhere. When it's done, immidiately you
+    shop, just next to the tutorial somewhere. When it's done, immediately you
     must run the `avrdude` command. You will see that it is possible that the
-    serial device has changed (/dev/ttyACM0 to /dev/ttyACM1). That's because
-    your board has rebooted.
+    serial device has changed (`/dev/ttyACM0` to `/dev/ttyACM1`). That's
+    because your board has rebooted.
 
     I'm sure at this point you are wondering why the Arduino can flash it
     without pressing the button and how. My guess is that when you compile a
@@ -269,7 +269,7 @@ journey.
     sequence properly and make it go into flash mode.
 
     **Important:** please note that your Rust code does not include this reboot
-    code. When your Rust code is running, /dev/ttyACM0 won't be available and
+    code. When your Rust code is running, `/dev/ttyACM0` won't be available and
     you won't be able to just press the upload button in the Arduino IDE
     anymore. You will always need to press twice (or long press, whatever it
     is) the reset button when you flash and a Rust code is installed. If you do
