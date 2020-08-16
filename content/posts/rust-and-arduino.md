@@ -121,7 +121,7 @@ Once you find the source, start looking for the `avrdude` binary. This program
 allows you to (I assume) flash all the AVR based board but it will require some
 parameters for your specific board.
 
-```
+```text
 > find . -name avrdude -type f
 ./packages/SparkFun/hardware/avr/1.1.13/bootloaders/optiboot/avrdude
 ./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude
@@ -130,7 +130,7 @@ parameters for your specific board.
 One of the result is used by Arduino to upload your code. Lets try to figure
 out which one.
 
-```
+```text
 > ls -l (find . -name avrdude -type f)
 .rw-r--r--   0 cecile  5 Nov  2019 ./packages/SparkFun/hardware/avr/1.1.13/bootloaders/optiboot/avrdude
 .rwxr-xr-x 281 cecile 14 Aug 15:52 ./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude
@@ -140,7 +140,7 @@ We can exclude the 0 bytes one and we now know where is the `avrdude`. Let's
 see what commands it runs. To do that we are going to wrap the executable in a
 bash script that will log all the commands that have been run:
 
-```
+```text
 mv ./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude \
     ./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude-original
 ```
@@ -149,7 +149,6 @@ Now make a new file
 `./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude` and put this:
 
 ```bash
-
 #!/bin/bash
 
 echo "$@" >> /tmp/avrdude.log
@@ -165,14 +164,14 @@ saved in `/tmp/avrdude.log`:
 
 (The following output is from my machine. You must check your output.)
 
-```
+```text
 -C/home/cecile/.arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/etc/avrdude.conf -q -q -patmega32u4 -cavr109 -P/dev/ttyACM0 -b57600 -D -Uflash:w:/tmp/arduino_build_808706/Blink.ino.hex:i
 ```
 
 These are the arguments passed to avrdude to flash your board. Your own avrdude
 command to flash with your Rust program should look like this:
 
-```
+```text
 ~/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude \
     -C/home/cecile/.arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/etc/avrdude.conf
     -q -q -patmega32u4 -cavr109 -P/dev/ttyACM0 -b57600 \
