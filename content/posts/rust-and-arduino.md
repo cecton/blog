@@ -6,11 +6,11 @@ Introduction
 ------------
 I often got interested by Arduino's because of some specific problems they can
 solve, like: programming your thermostat for instance, automate your house,
-etc... When I first heard of it a friend of me gave me some hardware to try to
-get into it. Unfortunately I never really managed to into it mainly because it
-was not what I imagined. Coming from a "Python Developer" background, doing
-C/C++ felt terribly wrong and using an IDE in Java felt like I had no control
-or no idea of what I was actually doing.
+etc... When I first heard of it a friend of mine gave me some hardware so I can
+experiment. Unfortunately I never really managed to get into it mainly because
+it was not what I imagined. Coming from a "Python Developer" background, doing
+C/C++ felt really bad and using an IDE in Java felt like I had no control or no
+idea of what I was actually doing.
 
 But ~2 years ago I've discovered Rust and it changed completely my career.
 Rust quickly became my favorite programming language and a door to different
