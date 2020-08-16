@@ -13,17 +13,18 @@ C/C++ felt really bad and using an IDE in Java felt like I had no control or no
 idea of what I was actually doing.
 
 But ~2 years ago I've discovered Rust and it changed completely my career.
-Rust quickly became my favorite programming language and a door to different
-kind of development. The news did reach me when I heard it is coming to
-embedded development and I decided recently to give it a shot. Not because I
-needed anymore, but just because I could.
+Rust quickly became my favorite programming language and it allowed me to
+explore new horizons. The news did reach me when I heard it is coming to
+embedded development and I decided recently to give it a real shot. Not because
+I needed anymore, but just because I could.
 
 Arduino and embedded development in general are not easy to grasp as you need
 general knowledge in electronic engineering: what is a resistor, how to
-measure, what happens if I measure from here to there, how do I even find the
-information about what am I suppose to connect where. But on the other hand
-Arduino did make everything very accessible and accessible to anyone (even
-kids)... if you don't mind C/C++ and an opinionated IDE.
+measure things, what happens if I measure from here to there, how do I even
+find the information about what am I supposed to connect where. But on the
+other hand it is important to say that Arduino did make everything very easy
+and accessible to anyone (even for kids)... (if you don't mind C/C++ and an
+opinionated IDE.)
 
 Prerequisites
 -------------
@@ -38,12 +39,12 @@ Prerequisites
 >
 > -- ["Frustrated? It's not you, it's Rust", by Amosi Wenger](https://fasterthanli.me/articles/frustrated-its-not-you-its-rust)
 
-### Help wanted?
+### Help Needed?
 
 It is a good habit to search the web the answers to your questions. I honestly
 find a great satisfaction when I find and learn things all by myself but it is
 sometimes harder, frustrating and time-eater. In any case, at some point you
-*will need* help and I would suggest to
+**will need** help and I would suggest to
 [join the avr-hal discussion channel](https://app.element.io/#/room/#rust-embedded:matrix.org).
 
 Getting Started Qwiickly
