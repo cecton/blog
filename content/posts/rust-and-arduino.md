@@ -253,11 +253,12 @@ journey.
     shop where you bought it.
 
     In my case the procedure was not to long press the reset button but to
-    press twice the reset button. I found that on the doc on the website of the
-    shop, just next to the tutorial somewhere. When it's done, immediately you
-    must run the `avrdude` command. You will see that it is possible that the
-    serial device has changed (`/dev/ttyACM0` to `/dev/ttyACM1`). That's
-    because your board has rebooted.
+    press twice the reset button. I found that on
+    [a doc](https://cdn.sparkfun.com/datasheets/Dev/Arduino/Boards/32U4Note.pdf)
+    on the website of the shop, in the "Documents" section. When it's done,
+    immediately you must run the `avrdude` command. You will see that it is
+    possible that the serial device has changed (`/dev/ttyACM0` to
+    `/dev/ttyACM1`). That's because your board has rebooted.
 
     I'm sure at this point you are wondering why the Arduino can flash it
     without pressing the button and how. My guess is that when you compile a
