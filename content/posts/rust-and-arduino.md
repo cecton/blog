@@ -237,7 +237,8 @@ journey.
     ```
 
     Don't do `-F`. I have no idea what will happen. But I know it is possible
-    to brick your board so it's best to avoid mistakes as much as possible.
+    to [brick](https://en.wikipedia.org/wiki/Brick_(electronics)) your board so
+    it's best to avoid mistakes as much as possible.
 
     You get this error when the board is not in "flashing mode". In other words
     you need to do something first (usually --but not always-- long pressing
