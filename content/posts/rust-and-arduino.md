@@ -275,9 +275,9 @@ journey.
     you won't be able to just press the upload button in the Arduino IDE
     anymore. You will always need to press twice (or long press, whatever it
     is) the reset button when you flash and a Rust code is installed. If you do
-    flash an Arduino code, this will effectively restore that feature (but it
-    will work only while the Arduino code is installed, it will be gone if you
-    flash again a Rust code).
+    flash with an Arduino code, this will effectively restore that feature (but
+    it will work only while the Arduino code is installed, it will be gone if
+    you flash again a Rust code).
 
 ### Expected status
 
