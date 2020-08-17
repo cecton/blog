@@ -5,4 +5,4 @@ publish = "public"
 command = "curl -sL https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_extended_0.54.0_Linux-64bit.tar.gz | tar xvz && LD_LIBRARY_PATH=$HOME/stdc++6/usr/lib/x86_64-linux-gnu ./hugo --gc --minify"
 
 [context.deploy-preview]
-command = "curl -sL https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_extended_0.54.0_Linux-64bit.tar.gz | tar xvz && LD_LIBRARY_PATH=$HOME/stdc++6/usr/lib/x86_64-linux-gnu ./hugo --gc --deployUrl $DEPLOY_URL"
+command = "curl -sL https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_extended_0.54.0_Linux-64bit.tar.gz | tar xvz && LD_LIBRARY_PATH=$HOME/stdc++6/usr/lib/x86_64-linux-gnu ./hugo --gc --baseURL $DEPLOY_URL"
