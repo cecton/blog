@@ -1,5 +1,5 @@
 ---
-title: "Rust, Arduino and Embedded Development as a Beginner": Part 1
+title: "Rust, Arduino and Embedded Development as a Beginner: Part 1"
 date: 2020-08-16T18:42:00+02:00
 ---
 Introduction
