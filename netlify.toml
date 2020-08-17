@@ -1,3 +1,3 @@
 [build]
 publish = "public"
-environment = { HUGO_VERSION = "0.54.0" }
+command = "curl -sL https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_extended_0.54.0_Linux-64bit.tar.gz | tar xvz && LD_LIBRARY_PATH=$HOME/stdc++6/usr/lib/x86_64-linux-gnu ./hugo --gc --minify"
