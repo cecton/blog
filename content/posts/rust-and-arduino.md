@@ -1,5 +1,5 @@
 ---
-title: "Rust, Arduino and Embedded Development as a Beginner"
+title: "Rust, Arduino and Embedded Development as a Beginner": Part 1
 date: 2020-08-16T18:42:00+02:00
 ---
 Introduction
@@ -39,7 +39,7 @@ Prerequisites
 >
 > -- ["Frustrated? It's not you, it's Rust", by Amosi Wenger](https://fasterthanli.me/articles/frustrated-its-not-you-its-rust)
 
-### Help Needed?
+### Help needed?
 
 It is a good habit to search the web the answers to your questions. I honestly
 find a great satisfaction when I find and learn things all by myself but it is
@@ -49,12 +49,12 @@ sometimes harder, frustrating and time-eater. In any case, at some point you
 and check the content of the
 [embedded Rust documentation](https://docs.rust-embedded.org/).
 
-### My Own Hardware Choice
+### My own hardware choice
 
  *  [SparkFun Qwiic Pro Micro - USB-C (ATmega32U4)](https://www.sparkfun.com/products/15795)
  *  [Zio Qwiic OLED Display (1.5inch, 128x128)](https://www.sparkfun.com/products/15890)
 
-Getting Started Vewy Qwiickly
+Getting started vewy qwiickly
 -----------------------------
 
 If like me you don't want to spend too much time on the hardware and start the
@@ -71,7 +71,7 @@ a link to a very good documentation of I2C and its relation to the others. I'd
 suggest to read at least the beginning  to understand the differences between
 the 3 and how I2C works.
 
-Choosing the Hardware
+Choosing the hardware
 ---------------------
 
 Ideally you want a board for which we already have support in Rust. That is why
@@ -86,7 +86,7 @@ and a screen (any screen). All I wanted to do is to display an animation on
 this screen. So any device that has Qwiic connector would have work for my
 project.
 
-First Step: Making Sure Everything Works
+First step: making sure everything works
 ----------------------------------------
 
 The good thing with Arduino is that there are already examples for everything.
@@ -115,8 +115,8 @@ journey.
 
 ### Troubleshooting
 
-1.  "Oh hey, I followed the instructions and now I have a hex file. What do I
-    do?"
+1.  *Oh hey, I followed the instructions and now I have a hex file. What do I
+    do?*
 
     During my first experience with the Arduino I did learn something: how to
     flash a board without the IDE. Of course I have entirely forgot it so I
@@ -161,7 +161,7 @@ journey.
     this:
 
     ```bash
-#!/bin/bash
+    #!/bin/bash
 
     echo "$@" >> /tmp/avrdude.log
 
@@ -210,7 +210,7 @@ journey.
      - `-Uflash:w:/tmp/arduino_build_808706/Blink.ino.hex:i`: the `.hex` file
        is in there. That's how you pass the code.
 
-2.  What is a "programmer"?
+2.  *What is a "programmer"?*
 
     It is good that you asked. If you didn't, you should try to ask yourself more
     questions. If you try to get through while ignoring things you will get a more
@@ -224,8 +224,8 @@ journey.
     as the protocol may vary. (Note that a programmer is also a piece of hardware
     capable to flash the board in some cases. Hopefully you won't need that.)
 
-3.  Ok so I copied the command and I get this error. I can't even upload
-    Arduino's own `.hex`:
+3.  *Ok so I copied the command and I get this error. I can't even upload
+    Arduino's own `.hex`:*
 
     ```text
     Connecting to programmer: .avrdude: butterfly_recv(): programmer is not responding
@@ -277,7 +277,7 @@ journey.
     will work only while the Arduino code is installed, it will be gone if you
     flash again a Rust code).
 
-### Expected Status
+### Expected status
 
 Right now you should have managed to upload the blink program of `avr-hal`'s
 examples and your board should be blinking. Hopefully this first tutorial
