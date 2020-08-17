@@ -173,7 +173,7 @@ journey.
 
     Make the file executable:
 
-    ```bash
+    ```
     chmod +x ./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude
     ```
 
