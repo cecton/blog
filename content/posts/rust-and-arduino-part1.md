@@ -4,6 +4,7 @@ date: 2020-08-16T18:42:00+02:00
 ---
 Introduction
 ------------
+
 I often got interested by Arduino's because of some specific problems they can
 solve, like: programming your thermostat for instance, automate your house,
 etc... When I first heard of it a friend of mine gave me some hardware so I can
@@ -53,6 +54,8 @@ and check the content of the
 
  *  [SparkFun Qwiic Pro Micro - USB-C (ATmega32U4)](https://www.sparkfun.com/products/15795)
  *  [Zio Qwiic OLED Display (1.5inch, 128x128)](https://www.sparkfun.com/products/15890)
+ *  [Qwiic Cable - 50mm](https://www.sparkfun.com/products/14426)
+ *  [USB to TTL Serial Cable](https://www.sparkfun.com/products/12977)
 
 Getting started vewy qwiickly
 -----------------------------
