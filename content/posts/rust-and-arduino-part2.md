@@ -26,7 +26,7 @@ communication. Compile the example, flash the board and try.
 1.  Oh, already?
 
     Communication on serial is really easy and the example works almost
-    out-of-the-box so there isn't much to say except solving the issue you will
+    out-of-the-box so there isn't much to say except solving the issue you may
     encounter.
 
 2.  How do I listen to the serial port?
@@ -103,3 +103,61 @@ communication. Compile the example, flash the board and try.
 
     At this point you should see something on the terminal or press a key to
     make it react (the example code waits for a key).
+
+Drawing pixels on the screen
+----------------------------
+
+### Ensure the screen is detected
+
+Open the i2cdetect example and run it. The USB serial cable must be connected
+before the board boots. You should see something like this on the terminal:
+
+```
+Write direction test:
+-    0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:       -- -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- 3c -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
+
+Read direction test:
+-    0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:       -- -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- 3c
+```
+
+If you see something like this instead it means the screen is not detected
+(check that it is properly connected).
+
+```
+Write direction test:
+-    0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:       -- -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
+
+Read direction test:
+-    0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:       -- -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
+```
+
+It is also possible that the cables of the serial moves a bit. Give it a few
+tries.
