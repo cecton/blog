@@ -83,8 +83,8 @@ communication. Compile the example, flash the board and try.
     board and the orange/green cable to the RXD on the board.)
 
     The red cable is only used when you need to power the device. If you
-    connect it and also connect the USB cable, I believe you will send 10V to
-    the board and it may die.
+    connect it and also connect the USB cable, bad things will happen. You may
+    damage one of the device due to overcurrent conditions.
 
     TXD means "transmit data" while RXD means "receive data".
 
@@ -161,3 +161,110 @@ Read direction test:
 
 It is also possible that the cables of the serial moves a bit. Give it a few
 tries.
+
+### Ping the screen
+
+If you take the example of blinking a led and mix it with the example of using
+i2c, you can make a led that turns on when the screen is connected. In the API
+of avr-hal you will find the function
+[`ping_slave`](https://rahix.github.io/avr-hal/atmega32u4_hal/i2c/struct.I2c.html#method.ping_slave)
+which returns a boolean if the slave answers to the ping. You will need the
+address of the device which you can find somewhere in the documentation of the
+screen. For the one we have chosen, this address is `0111100`. All the units of
+this screen share the same address, it is not unique.
+
+```rust
+#![no_std]
+#![no_main]
+
+extern crate panic_halt;
+use arduino_leonardo::prelude::*;
+
+#[arduino_leonardo::entry]
+fn main() -> ! {
+    let dp = arduino_leonardo::Peripherals::take().unwrap();
+
+    let mut delay = arduino_leonardo::Delay::new();
+    let mut pins = arduino_leonardo::Pins::new(dp.PORTB, dp.PORTC, dp.PORTD, dp.PORTE);
+    let mut led_rx = pins.led_rx.into_output(&mut pins.ddr);
+    let mut serial = arduino_leonardo::Serial::new(
+        dp.USART1,
+        pins.d0,
+        pins.d1.into_output(&mut pins.ddr),
+        57600,
+    );
+    let mut i2c = arduino_leonardo::I2c::new(
+        dp.TWI,
+        pins.d2.into_pull_up_input(&mut pins.ddr),
+        pins.d3.into_pull_up_input(&mut pins.ddr),
+        50000,
+    );
+
+    let address = 0b0111100; // replace this by the address of your device
+
+    loop {
+        match i2c.ping_slave(address, arduino_leonardo::hal::i2c::Direction::Write) {
+            Ok(true) => led_rx.set_low().void_unwrap(),
+            Ok(false) => led_rx.set_high().void_unwrap(),
+            Err(err) => ufmt::uwriteln!(&mut serial, "Error: {:?}", err).void_unwrap(),
+        }
+        delay.delay_ms(1000u16);
+    }
+}
+```
+
+You can connect and disconnect the screen while it is running and you will see
+the led turning on and off (with a delay of max 1 second).
+
+### Turning on the screen
+
+To turn on the screen we will need to send a command to the screen. If you
+[check the documentation](https://cdn.sparkfun.com/assets/1/a/5/d/4/DS-15890-Zio_OLED.pdf)
+of our screen you will see that this screen has 2 modes of communication:
+
+ *  one for data: you send the pixel's color with it
+ *  one for commands: you can turn on, turn off, stand by, do some scrolling,
+    and even do some effects on the image
+
+All the commands are listed in the documentation. The one we are interested in
+is the command `AFh`. `h` stands for hexadecimal. This is the command `0xaf` in
+our code.
+
+To send the command `0xaf` you will need to prefix it with the byte that will
+the screen that this is a command and not a pixel. This is documented in the
+I2C protocol section of the documentation but since avr-hal does already all
+the work for sending I2C commands, we only need to care about the content of
+the packet.
+
+> After the transmission of the slave address, either the control byte or the
+> data byte may be sent across the SDA. A control byte mainly consists of Co
+> and D/C# bits following by six “0” ‘s.
+>
+> a.If the Co bit is set as logic “0”, the transmission of the following
+> information will contain data bytes only.
+>
+> b.The D/C# bit determines the next data byte is acted as a command or a data.
+> If the D/C# bit is set to logic “0”, it defines the following data byte as a
+> command. If the D/C# bit is set to logic “1”, it defines the following data
+> byte as a data which will be stored at the GDDRAM. The GDDRAM column address
+> pointer will be increased by one automatically after each data write.
+
+In other words, a full byte is sent but only the 2 first bits are used:
+
+ *  To send a command we will need to set the Co bit to 1 and the D/C# bit to
+    0.
+ *  To send a data on the other hand we will need to either set the Co bit to 0
+    or set the Co bit to a and the D/C# bit to 1. (I don't know what is the
+    difference.)
+
+
+
+## Notes
+
+
+Voltage will only add if you ground one of the power supplies at the positive output of the other
+E.g. V1 connects the positive V to node X and the negative to G.
+V2 is connects positive to node Y and negative to X
+
+That means that if you measure G -> Y, it's equal to V1 + v2
+And if you do that you need to be careful that the supplies do not share a common ground or it can blow up on you
