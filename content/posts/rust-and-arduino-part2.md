@@ -254,7 +254,7 @@ In other words, a full byte is sent but only the 2 first bits are used:
  *  To send a command we will need to set the Co bit to 1 and the D/C# bit to
     0.
  *  To send a data on the other hand we will need to either set the Co bit to 0
-    or set the Co bit to a and the D/C# bit to 1. (I don't know what is the
+    or set the Co bit to 1 and the D/C# bit to 1. (I don't know what is the
     difference.)
 
 
