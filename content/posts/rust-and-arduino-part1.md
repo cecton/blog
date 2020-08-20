@@ -241,7 +241,9 @@ journey.
 
     Don't do `-F`. I have no idea what will happen. But I know it is possible
     to [brick](https://en.wikipedia.org/wiki/Brick_(electronics)) your board so
-    it's best to avoid mistakes as much as possible.
+    it's best to avoid mistakes as much as possible. Check the manual of
+    avrdude for more information `man avrdude` (also available online
+    [here](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html)).
 
     You get this error when the board is not in "flashing mode". In other words
     you need to do something first (usually --but not always-- long pressing
