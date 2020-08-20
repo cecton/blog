@@ -170,8 +170,8 @@ of avr-hal you will find the function
 [`ping_slave`](https://rahix.github.io/avr-hal/atmega32u4_hal/i2c/struct.I2c.html#method.ping_slave)
 which returns a boolean if the slave answers to the ping. You will need the
 address of the device which you can find somewhere in the documentation of the
-screen. For the one we have chosen, this address is `0111100`. All the units of
-this screen share the same address, it is not unique.
+screen. For the one we have chosen, this address is `0b0111100` (binary). All
+the units of this screen share the same address, it is not unique.
 
 ```rust
 #![no_std]
