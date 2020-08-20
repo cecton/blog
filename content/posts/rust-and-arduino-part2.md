@@ -38,16 +38,16 @@ serial communication. Compile the example, flash the board and try.
 
     The installation is easy with cargo:
 
-    ```
+    ```text
     cargo install serial-monitor
     ```
 
     This will download the sources, compile and install the binary in
-    `~/.cargo/bin` which you can to your `PATH` if it is not already done.
+    `~/.cargo/bin` which you can add to your `PATH` if it is not already done.
 
     Now you can connect to the port with the following command:
 
-    ```
+    ```text
     serial-monitor -p /dev/<some-tty> -b <bauds>
     ```
 
@@ -97,7 +97,7 @@ serial communication. Compile the example, flash the board and try.
     `/dev/ttyUSB0` (this may vary depending on your system and distribution).
     You can communicate with it using:
 
-    ```
+    ```text
     serial-monitor -p /dev/ttyUSB1 -b 57600
     ```
 
@@ -112,7 +112,7 @@ Drawing pixels on the screen
 Open the i2cdetect example and run it. The USB serial cable must be connected
 before the board boots. You should see something like this on the terminal:
 
-```
+```text
 Write direction test:
 -    0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
 00:       -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -135,7 +135,7 @@ Read direction test:
 If you see something like this instead it means the screen is not detected
 (check that it is properly connected).
 
-```
+```text
 Write direction test:
 -    0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
 00:       -- -- -- -- -- -- -- -- -- -- -- -- -- --
