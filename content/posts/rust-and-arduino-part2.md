@@ -249,22 +249,157 @@ the packet.
 > byte as a data which will be stored at the GDDRAM. The GDDRAM column address
 > pointer will be increased by one automatically after each data write.
 
-In other words, a full byte is sent but only the 2 first bits are used:
+I did try to make sense of this but in the end I had to test empirically and
+this is what worked:
 
- *  To send a command we will need to set the Co bit to 1 and the D/C# bit to
-    0.
- *  To send a data on the other hand we will need to either set the Co bit to 0
-    or set the Co bit to 1 and the D/C# bit to 1. (I don't know what is the
-    difference.)
+ *  0b00000000 (8 zeroes): send a command
+ *  0b01000000 (zero-one-6 zeroes): send data
 
+Let try to turn on the screen by sending the command `0xaf`:
 
+```rust
+#![no_std]
+#![no_main]
 
-## Notes
+extern crate panic_halt;
+use arduino_leonardo::prelude::*;
 
+#[arduino_leonardo::entry]
+fn main() -> ! {
+    let dp = arduino_leonardo::Peripherals::take().unwrap();
 
-Voltage will only add if you ground one of the power supplies at the positive output of the other
-E.g. V1 connects the positive V to node X and the negative to G.
-V2 is connects positive to node Y and negative to X
+    let mut delay = arduino_leonardo::Delay::new();
+    let mut pins = arduino_leonardo::Pins::new(dp.PORTB, dp.PORTC, dp.PORTD, dp.PORTE);
+    let mut led_rx = pins.led_rx.into_output(&mut pins.ddr);
+    let mut serial = arduino_leonardo::Serial::new(
+        dp.USART1,
+        pins.d0,
+        pins.d1.into_output(&mut pins.ddr),
+        57600,
+    );
+    let mut i2c = arduino_leonardo::I2c::new(
+        dp.TWI,
+        pins.d2.into_pull_up_input(&mut pins.ddr),
+        pins.d3.into_pull_up_input(&mut pins.ddr),
+        50000,
+    );
 
-That means that if you measure G -> Y, it's equal to V1 + v2
-And if you do that you need to be careful that the supplies do not share a common ground or it can blow up on you
+    let address = 0b0111100; // replace this by the address of your device
+
+    // turn on the screen
+    if let Err(err) = i2c.write(address, &[0b00000000, 0xaf]) {
+        ufmt::uwriteln!(&mut serial, "Error: {:?}", err).void_unwrap();
+    }
+
+    loop {
+        match i2c.ping_slave(address, arduino_leonardo::hal::i2c::Direction::Write) {
+            Ok(true) => led_rx.set_low().void_unwrap(),
+            Ok(false) => led_rx.set_high().void_unwrap(),
+            Err(err) => ufmt::uwriteln!(&mut serial, "Error: {:?}", err).void_unwrap(),
+        }
+        delay.delay_ms(1000u16);
+    }
+}
+```
+
+This should turn on the screen when the program starts. What you will see on
+the screen is a random mess of pixels. This what is in the memory of the screen
+when you turn it on but since it is volatile, it can be really anything. Now we
+need to clear the screen.
+
+### Filling up the screen
+
+To fill up the screen we will first need to send a few commands to set the
+coordinate of where we are going to draw. Then we send the pixels as data to
+fill up the space.
+
+If you check the list commands in the manual you will find the command `15h`
+(`0x15`) and `75h` (`0x75`) to set the column and the row respectively.
+
+Both commands take two values: the start address and the address. In other
+words: `0x15` takes x1 and x2 while 0x75 takes y1 and y2.
+
+Somewhere in the documentation you will also find that the different shade of
+grey are actually coded on 4 bits. This actually means that 1 data byte is used
+for 2 pixels on the screen. Therefore you will need to send twice less bytes
+than the number of pixels you are going to draw.
+
+```rust
+#![no_std]
+#![no_main]
+
+extern crate panic_halt;
+use arduino_leonardo::prelude::*;
+
+#[arduino_leonardo::entry]
+fn main() -> ! {
+    let dp = arduino_leonardo::Peripherals::take().unwrap();
+
+    let mut delay = arduino_leonardo::Delay::new();
+    let mut pins = arduino_leonardo::Pins::new(dp.PORTB, dp.PORTC, dp.PORTD, dp.PORTE);
+    let mut led_rx = pins.led_rx.into_output(&mut pins.ddr);
+    let mut serial = arduino_leonardo::Serial::new(
+        dp.USART1,
+        pins.d0,
+        pins.d1.into_output(&mut pins.ddr),
+        57600,
+    );
+    let mut i2c = arduino_leonardo::I2c::new(
+        dp.TWI,
+        pins.d2.into_pull_up_input(&mut pins.ddr),
+        pins.d3.into_pull_up_input(&mut pins.ddr),
+        50000,
+    );
+
+    let address = 0b0111100; // replace this by the address of your device
+
+    // a small macro to help us send commands without repeating ourselves too much
+    macro_rules! write_cmd {
+        ($($bytes:expr),+) => {{
+            if let Err(err) = i2c.write(address, &[0b00000000, $($bytes),+]) {
+                ufmt::uwriteln!(&mut serial, "Error: {:?}", err).void_unwrap();
+            }
+        }};
+    }
+
+    // turn on the screen
+    write_cmd!(0xaf);
+
+    // fill the screen
+    // our screen is 128 pixels long but we divide by 2 because there are 2 pixels per byte
+    write_cmd!(0x15, 0, 63);
+    // our screen is 128 pixels height
+    write_cmd!(0x75, 0, 127);
+    // we initialize an array of 64 + 1 bytes because 128 pixels / 2 + 1 byte for the control byte
+    let mut data = [0x00; 65];
+    data[0] = 0b01000000; // the control byte
+    for _ in 0..128 {
+        if let Err(err) = i2c.write(address, &data) {
+            ufmt::uwriteln!(&mut serial, "Error: {:?}", err).void_unwrap();
+        }
+    }
+    // we should free the memory as it is quite limited
+    drop(data);
+
+    loop {
+        match i2c.ping_slave(address, arduino_leonardo::hal::i2c::Direction::Write) {
+            Ok(true) => led_rx.set_low().void_unwrap(),
+            Ok(false) => led_rx.set_high().void_unwrap(),
+            Err(err) => ufmt::uwriteln!(&mut serial, "Error: {:?}", err).void_unwrap(),
+        }
+        delay.delay_ms(1000u16);
+    }
+}
+```
+
+This should fill your screen. You will see that this is not instant. The best
+speed you can achieve is around 6 FPS. This is because this particular board
+can not go faster than 400 kHz for its 2-wire serial interface (aka TWI) (this
+is the I2C protocol).
+
+It also seems to draw first the even lines and then the odd lines (or the other
+way around). This can be changed using some command (check the documentation).
+
+This code could also be optimized by calling the minimum amount of time the
+`write` method. The memory is limited so I personally used 2049 and called 4
+times the `write` method to fill up the screen.
