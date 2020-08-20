@@ -18,7 +18,7 @@ would become handy if we want to debug.
 
 On the repository of
 [avr-hal](https://github.com/Rahix/avr-hal/tree/master/boards/arduino-leonardo/examples)
-that you already "gloned", you will find that there is also am example for
+that you already "gloned", you will find that there is also an example for
 serial communication. Compile the example, flash the board and try.
 
 ### Troubleshooting
