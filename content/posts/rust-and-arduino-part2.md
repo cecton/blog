@@ -231,23 +231,24 @@ is the command `AFh`. `h` stands for hexadecimal. This is the command `0xaf` in
 our code.
 
 To send the command `0xaf` you will need to prefix it with the byte that will
-the screen that this is a command and not a pixel. This is documented in the
-I2C protocol section of the documentation but since avr-hal does already all
-the work for sending I2C commands, we only need to care about the content of
-the packet.
+tell the screen that this is a command and not data (pixels). This is
+documented in the I2C protocol section of the documentation but since avr-hal
+does already all the work for sending I2C commands, we only need to care about
+the content of the packet.
 
-> After the transmission of the slave address, either the control byte or the
+> *After the transmission of the slave address, either the control byte or the
 > data byte may be sent across the SDA. A control byte mainly consists of Co
-> and D/C# bits following by six “0” ‘s.
+> and D/C# bits following by six “0” ‘s.*
 >
-> a.If the Co bit is set as logic “0”, the transmission of the following
-> information will contain data bytes only.
+> *a. If the Co bit is set as logic “0”, the transmission of the following
+> information will contain data bytes only.*
 >
-> b.The D/C# bit determines the next data byte is acted as a command or a data.
-> If the D/C# bit is set to logic “0”, it defines the following data byte as a
-> command. If the D/C# bit is set to logic “1”, it defines the following data
-> byte as a data which will be stored at the GDDRAM. The GDDRAM column address
-> pointer will be increased by one automatically after each data write.
+> *b. The D/C# bit determines the next data byte is acted as a command or a
+> data.  If the D/C# bit is set to logic “0”, it defines the following data
+> byte as a command. If the D/C# bit is set to logic “1”, it defines the
+> following data byte as a data which will be stored at the GDDRAM. The GDDRAM
+> column address pointer will be increased by one automatically after each data
+> write.*
 
 I did try to make sense of this but in the end I had to test empirically and
 this is what worked:
