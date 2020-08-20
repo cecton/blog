@@ -304,9 +304,10 @@ fn main() -> ! {
 ```
 
 This should turn on the screen when the program starts. What you will see on
-the screen is a random mess of pixels. This what is in the memory of the screen
-when you turn it on but since it is volatile, it can be really anything. Now we
-need to clear the screen.
+the screen is a random mess of pixels. This is what is in the memory of the
+screen when you turn it on but since it is
+[volatile](https://en.wikipedia.org/wiki/Volatile_memory), it can be really
+anything.  Now we need to clear the screen.
 
 ### Filling up the screen
 
@@ -318,7 +319,8 @@ If you check the list of commands in the manual you will find the command `15h`
 (`0x15`) and `75h` (`0x75`) to set the column and the row respectively.
 
 Both commands take two values: the start address and the end address. In other
-words: `0x15` takes x1 and x2 while 0x75 takes y1 and y2.
+words: `0x15` takes x1 and x2 while `0x75` takes y1 and y2 of the rectangle we
+are going to draw.
 
 Somewhere in the documentation you will also find that the different levels of
 grey are actually coded on 4 bits. This actually means that 1 data byte is used
