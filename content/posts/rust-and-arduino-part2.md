@@ -249,6 +249,8 @@ the content of the packet.
 > following data byte as a data which will be stored at the GDDRAM. The GDDRAM
 > column address pointer will be increased by one automatically after each data
 > write.*
+>
+> -- [The documentation](https://cdn.sparkfun.com/assets/1/a/5/d/4/DS-15890-Zio_OLED.pdf)
 
 I did try to make sense of this but in the end I had to test empirically and
 this is what worked:
