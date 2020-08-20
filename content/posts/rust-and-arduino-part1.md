@@ -289,3 +289,6 @@ journey.
 Right now you should have managed to upload the blink program of `avr-hal`'s
 examples and your board should be blinking. Hopefully this first tutorial
 managed to get you on track for what will come next.
+
+You can now adventure to the [part 2]({{< ref "rust-and-arduino-part2" >}}),
+and learn how actually draw pixels on the screen.
