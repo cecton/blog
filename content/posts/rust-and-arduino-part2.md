@@ -310,16 +310,16 @@ need to clear the screen.
 ### Filling up the screen
 
 To fill up the screen we will first need to send a few commands to set the
-coordinate of where we are going to draw. Then we send the pixels as data to
+coordinates of where we are going to draw. Then we send the pixels as data to
 fill up the space.
 
-If you check the list commands in the manual you will find the command `15h`
+If you check the list of commands in the manual you will find the command `15h`
 (`0x15`) and `75h` (`0x75`) to set the column and the row respectively.
 
-Both commands take two values: the start address and the address. In other
+Both commands take two values: the start address and the end address. In other
 words: `0x15` takes x1 and x2 while 0x75 takes y1 and y2.
 
-Somewhere in the documentation you will also find that the different shade of
+Somewhere in the documentation you will also find that the different levels of
 grey are actually coded on 4 bits. This actually means that 1 data byte is used
 for 2 pixels on the screen. Therefore you will need to send twice less bytes
 than the number of pixels you are going to draw.
@@ -371,8 +371,8 @@ fn main() -> ! {
     // our screen is 128 pixels height
     write_cmd!(0x75, 0, 127);
     // we initialize an array of 64 + 1 bytes because 128 pixels / 2 + 1 byte for the control byte
-    let mut data = [0x00; 65];
-    data[0] = 0b01000000; // the control byte
+    let mut data = [0xff; 65];
+    data[0] = 0b01000000; // the control byte to send data
     for _ in 0..128 {
         if let Err(err) = i2c.write(address, &data) {
             ufmt::uwriteln!(&mut serial, "Error: {:?}", err).void_unwrap();
@@ -398,7 +398,7 @@ can not go faster than 400 kHz for its 2-wire serial interface (aka TWI) (this
 is the I2C protocol).
 
 It also seems to draw first the even lines and then the odd lines (or the other
-way around). This can be changed using some command (check the documentation).
+way around). This can be changed using the command: `0xa0 0x51`.
 
 This code could also be optimized by calling the minimum amount of time the
 `write` method. The memory is limited so I personally used 2049 and called 4
