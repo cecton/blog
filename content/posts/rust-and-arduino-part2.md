@@ -258,8 +258,9 @@ this is what worked:
  *  0b00000000 (8 zeroes): send a command
  *  0b01000000 (zero-one-6 zeroes): send data
 
-A friend of mine later on told me that the Co bit actually means "more data is
-to come" if set to `0`. This is his full explanation:
+My friend [Wouter Dullaert](https://wdullaer.com/) later on told me that the Co
+bit actually means "more data is to come" if set to `0`. This is his full
+explanation:
 
 > *The "application" protocol of the OLED driver is byte oriented. The first
 > byte you send, the control byte, tells the screen what it should expect for
