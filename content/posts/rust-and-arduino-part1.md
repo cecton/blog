@@ -36,9 +36,9 @@ Prerequisites
  *  Willingness to learn
  *  Understand the struggle will be real and painful
 
-> Maybe, after years of successfully shipping code, you don't have quite the
+> *Maybe, after years of successfully shipping code, you don't have quite the
 > same curiosity, the same candor and willingness to feel "lost" that you did
-> back when you started.
+> back when you started.*
 >
 > -- ["Frustrated? It's not you, it's Rust", by Amosi Wenger](https://fasterthanli.me/articles/frustrated-its-not-you-its-rust)
 
