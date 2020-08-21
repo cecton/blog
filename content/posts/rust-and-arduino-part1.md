@@ -24,8 +24,7 @@ general knowledge in electronic engineering: what is a resistor, how to
 measure things, what happens if I measure from here to there, how do I even
 find the information about what am I supposed to connect where. But on the
 other hand it is important to say that Arduino did make everything very easy
-and accessible to anyone (even for kids)... (if you don't mind C/C++ and an
-opinionated IDE.)
+and accessible to anyone... (if you don't mind C/C++ and an opinionated IDE.)
 
 Prerequisites
 -------------
@@ -67,10 +66,10 @@ adjustment for you. The only thing you need are devices with Qwiic connectors.
 They can be connected in serial so you can actually connect multiple of them.
 
 Now to get a bit more into the details of what you need to know. This is an I2C
-connect or. In the world of embedded development you may encounter 3 different
+connector. In the world of embedded development you may encounter 3 different
 kinds of inter-device communication: UART, SPI and I2C. I'll drop
-[here](https://www.engineersgarage.com/tutorials/understanding-the-i2c-protocol/)
-a link to a very good documentation of I2C and its relation to the others. I'd
+[a link](https://www.engineersgarage.com/tutorials/understanding-the-i2c-protocol/)
+to a very good documentation of I2C and its relation to the others. I'd
 suggest to read at least the beginning  to understand the differences between
 the 3 and how I2C works.
 
@@ -149,10 +148,10 @@ journey.
     .rwxr-xr-x 281 cecile 14 Aug 15:52 ./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude
     ```
 
-    We can exclude the 0 bytes one and we now know where is the `avrdude`.
-    Let's see what commands it runs. To do that we are going to wrap the
-    executable in a bash script that will log all the commands that have been
-    run:
+    We can exclude the 0 bytes one, which leaves us with the correct `avrdude`
+    binary. Let's see what commands it runs. To do that we are going to wrap
+    the executable in a bash script that will log all the commands that have
+    been run:
 
     ```text
     mv ./packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude \
@@ -215,17 +214,21 @@ journey.
 
 2.  *What is a "programmer"?*
 
-    It is good that you asked. If you didn't, you should try to ask yourself more
-    questions. If you try to get through while ignoring things you will get a more
-    difficult time.
+    There is no such thing as asking too many questions. For me (and maybe for
+    you) this journey was a real discovery with a lot of vocabulary and basic
+    knowledge I miss because I never did electronic and such low level
+    programmation. I believe you will get an easier time if you do ask yourself
+    every question every time you encounter something new. Hopefully you will
+    find most of the answers in this article.
 
     Boards are almost identical if you have the same microchip. But there is a
     slight difference on how they boot your code. It's similar to having a
-    different motherboard on a PC if you prefer, the boot program is provided by
-    the board. A "programmer" is program that will communicate with the board and
-    allow flashing your code. You need to use the right programmer for your board
-    as the protocol may vary. (Note that a programmer is also a piece of hardware
-    capable to flash the board in some cases. Hopefully you won't need that.)
+    different motherboard on a PC if you prefer, the boot program is provided
+    by the board. A "programmer" is a program that will communicate with the
+    board and allow flashing your code. You need to use the right programmer
+    for your board as the protocol may vary. (Note that a programmer is also a
+    piece of hardware capable to flash the board in some cases. Hopefully
+    you won't need that.)
 
 3.  *Ok so I copied the command and I get this error. I can't even upload
     Arduino's own `.hex`:*
@@ -261,7 +264,7 @@ journey.
     press twice the reset button. I found that on
     [a doc](https://cdn.sparkfun.com/datasheets/Dev/Arduino/Boards/32U4Note.pdf)
     on the website of the shop, in the "Documents" section. When it's done,
-    immediately you must run the `avrdude` command. You will see that it is
+    you must run the `avrdude` command immediately. You will see that it is
     possible that the serial device has changed (`/dev/ttyACM0` to
     `/dev/ttyACM1`). That's because your board has rebooted.
 
@@ -282,7 +285,7 @@ journey.
     is) the reset button when you flash and a Rust code is installed. If you do
     flash with an Arduino code, this will effectively restore that feature (but
     it will work only while the Arduino code is installed, it will be gone if
-    you flash again a Rust code).
+    you flash a Rust program again).
 
 ### Expected status
 
@@ -291,4 +294,4 @@ examples and your board should be blinking. Hopefully this first tutorial
 managed to get you on track for what will come next.
 
 You can now adventure to the [part 2]({{< ref "rust-and-arduino-part2" >}}),
-and learn how actually draw pixels on the screen.
+and learn how to actually draw pixels on the screen.

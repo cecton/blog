@@ -6,8 +6,8 @@ Introduction
 ------------
 
 After reading the [part 1]({{< ref "rust-and-arduino-part1" >}}), our
-adventurers decided to go to the part 2 to see how the hell she managed to
-display pixels on an OLED screen.
+adventurers decided to go to part 2 to see how the hell they managed to display
+pixels on an OLED screen.
 
 Serial communication
 --------------------
@@ -65,18 +65,18 @@ serial communication. Compile the example, flash the board and try.
 
     Well, no.
 
-    People who does embedded development knows it very well, you need to
+    People who do embedded development know it very well, you need to
     connect to the serial interface on the board. Don't look for some kind of
     slot, it's not a slot, it's just some of those pins.
 
-    You can use the "USB to TTL Serial Cable". Connect first to the pin on the
-    board and then plug the USB. The pins on your board should be labeled.
+    You can use the "USB to TTL Serial Cable". Connect to the pin on the board
+    first and then plug the USB. The pins on your board should be labeled.
     Otherwise, check the documentation.
 
     I'm sure at this point you wonder how the hell do you connect a serial
     cable to the board. There are 4 colors: red (seems universally for power),
     black (seems universally for the ground), yellow/white (RXD), orange/green
-    (TXD). The serial work by **NOT CONNECTING THE RED CABLE AT ALL**, then
+    (TXD). The serial works by **NOT CONNECTING THE RED CABLE AT ALL**, then
     connect the ground to a GND pin, the RXD pin of the client to the TXD of
     the host and the TXD pin of the client to the RXD of the host. (In other
     words you need to connect the yellow/white cable to the TXD pin on the
@@ -159,7 +159,7 @@ Read direction test:
 70: -- -- -- -- -- -- -- --
 ```
 
-It is also possible that the cables of the serial moves a bit. Give it a few
+It is also possible that the cables of the serial moved a bit. Give it a few
 tries.
 
 ### Ping the screen
@@ -244,7 +244,7 @@ the content of the packet.
 > information will contain data bytes only.*
 >
 > *b. The D/C# bit determines the next data byte is acted as a command or a
-> data.  If the D/C# bit is set to logic “0”, it defines the following data
+> data. If the D/C# bit is set to logic “0”, it defines the following data
 > byte as a command. If the D/C# bit is set to logic “1”, it defines the
 > following data byte as a data which will be stored at the GDDRAM. The GDDRAM
 > column address pointer will be increased by one automatically after each data
@@ -257,6 +257,28 @@ this is what worked:
 
  *  0b00000000 (8 zeroes): send a command
  *  0b01000000 (zero-one-6 zeroes): send data
+
+A friend of mine later told me that the Co bit actually means "more data is to
+come" if set to `0`. This is his full explanation:
+
+> *The "application" protocol of the OLED driver is byte oriented. The first
+> byte you send, the control byte, tells the screen what it should expect for
+> the remainder of the payload. The driver exposes two boolean toggles: Co and
+> D/C#. These two toggles are laid out in the control byte as follows:*
+>
+> `Co Dx/C# p p p p p p`
+>
+> *`Co`: when set to 0 tells the screen that more data will follow after this
+> byte and that it needs to keep reading. It is not explained in this snippet
+> what happens if you set it to 1.*
+>
+> *`Dx/C#`: when set to 0 tells the screen that it needs to interpret the next
+> byte as a command. When set to 1 it will store the following bytes in
+> GDDRAM.*
+>
+> *`p`: padding. Our protocol is byte (8 bits) oriented and the two booleans only
+> take up 2 bits total. We need to add 6 more bits to fill a full byte. These
+> will always be 0.*
 
 Let try to turn on the screen by sending the command `0xaf`:
 
@@ -326,7 +348,7 @@ are going to draw.
 
 Somewhere in the documentation you will also find that the different levels of
 grey are actually coded on 4 bits. This actually means that 1 data byte is used
-for 2 pixels on the screen. Therefore you will need to send twice less bytes
+for 2 pixels on the screen. Therefore you will need to send half the bytes
 than the number of pixels you are going to draw.
 
 ```rust
