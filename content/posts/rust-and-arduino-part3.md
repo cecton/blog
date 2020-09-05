@@ -10,7 +10,7 @@ adventurers finally entered in the last step of the journey (or at least
 that's what they think) and are looking forward to...
 
 Make an animation on the screen
----------------------------------
+-------------------------------
 
 It is possible to make a small animation on this screen simply by drawing
 images one by one. For that we will need to download a small monochromic
@@ -19,7 +19,7 @@ animation. In this example I'm using
 
 ### Make a raw format
 
-Since we only need black or white pixels we could encode every pixel as bit.
+Since we only need black or white pixels we could encode every pixel as a bit.
 With this technique we can encode 8 pixels per byte. The tool
 [ImageMagick](https://imagemagick.org/index.php) can help us convert those
 images:
@@ -38,7 +38,7 @@ image must have a whole number of bytes. Therefore, our image of 33 pixels per
 row is converted to 40 pixels (40x42) which makes 210 bytes in total
 (`40 * 42 / 8`).
 
-### Include the animation in the code
+### Draw images one by one
 
 Now that we have `*.raw` files, we can include them in the program by using
 `const`. After adding a bit of code to convert our raw format to data bytes
@@ -115,19 +115,19 @@ fn main() -> ! {
         }
     }
 
-    // dimensions of the frames
+    // dimension of the frames
     let width = 40;
     let height = 42;
 
     // prepare drawing area
-    write_cmd!(0x15, 0, width / 2 - 1);
+    write_cmd!(0x15, 0, width / 2 - 1); // 2 pixels per data byte
     write_cmd!(0x75, 0, height - 1);
 
     // we override the first data byte with the control byte which tells the screen we are
     // sending data
     //
-    // note: it was already done before but just want to make sure in case you comment the screen
-    // filling above
+    // note: it was already done before but I just want to make sure in case you comment the
+    // screen filling above
     data[0] = 0b01000000;
 
     // a not-so-small macro to help us draw an image
@@ -159,7 +159,7 @@ fn main() -> ! {
             let mut i = 1;
             while let Some(chunk) = chunks.next() {
                 // copy_from_slice requires that the source slice and the destination slice are
-                // exactly the same otherwise it will panic
+                // exactly of the same size otherwise it will panic
                 data[i..(i+4)].copy_from_slice(&chunk);
                 i += 4;
             }
@@ -208,8 +208,9 @@ fn main() -> ! {
 
     That's because the frame files are probably missing. If you used the
     example directly, those file should be located near the `i2cdetect.rs` file
-    in the example directory. `include_bytes!` look for the file relative to
-    where the source file is.
+    in the example directory. The macro `include_bytes!` looks for the file
+    relative to where the source file is
+    ([see doc](https://doc.rust-lang.org/std/macro.include_bytes.html)).
 
 2.  *I think the first 6 frames show up correctly but the 7th is glitched and
     all the rest is glitched.*
@@ -219,9 +220,10 @@ fn main() -> ! {
     The reason why it is glitched is because we have a "stack corruption". In
     other words: the
     [stack memory](https://doc.rust-lang.org/stable/rust-by-example/std/box.html)
-    got corrupted. In this case it happens because our MCU (microcontroller
-    unit / board) has only 2500 bytes of memory and we are storing 15 images of
-    210 bytes (3150 bytes) in it.
+    got corrupted. In this case it happens because
+    [our MCU](http://cdn.sparkfun.com/datasheets/Dev/Arduino/Boards/ATMega32U4.pdf)
+    (microcontroller unit / board) has only 2500 bytes of memory and we are
+    storing 15 images of 210 bytes (3150 bytes) in it.
 
     I personally thought that
     [using `const` instead of `static`](https://doc.rust-lang.org/1.20.0/book/first-edition/const-and-static.html#static)
@@ -242,8 +244,9 @@ fn main() -> ! {
     single address space.
 
     Here on the [AVR](https://en.wikipedia.org/wiki/AVR_microcontrollers)
-    the program is actually stored and executed from a flash memory (16K on our
-    MCU) and therefore is not loaded in memory
+    the program is actually stored and executed from a flash memory (16kB on
+    [our MCU](http://cdn.sparkfun.com/datasheets/Dev/Arduino/Boards/ATMega32U4.pdf))
+    and therefore is not loaded in memory
     ([SRAM](https://en.wikipedia.org/wiki/Static_random-access_memory)). We say
     that AVR has "two address spaces". For example the address 1234 in flash
     memory also exists in SRAM. People sometimes call the separate model
@@ -251,7 +254,7 @@ fn main() -> ! {
     The SRAM is normally use for stack and heap memory during the execution.
 
     Ideally we want to only load what we need to our SRAM, for instance one
-    frame at the time, the rest should stay in flash memory. AVR actually has
+    frame at a time, the rest should stay in flash memory. AVR actually has
     instructions to load bytes from the flash memory to the SRAM (it even has
     instructions for saving to flash). Unfortunately the Rust compiler has been
     designed in a way that the consts are actually loaded into memory when the
@@ -260,3 +263,20 @@ fn main() -> ! {
     It is important to note that on ARM microcontrollers for example both flash
     and RAM are in the same address space. For example, they could have decided
     that addresses 0 through 1023 are RAM, and 1024 to 2047 are flash.
+
+3.  *How do we fix?*
+
+    We don't. It's probably very interesting to go deeper, learn more about
+    assembly and the Rust compiler but this is out of scope. I might come back
+    to it at some point but I also bought a
+    [RISC-V board](https://www.sparkfun.com/products/15799)
+    which is much more powerful (16kB data SRAM!).
+    [RISC-V](https://en.wikipedia.org/wiki/RISC-V)
+    is also particularly interesting because it is entirely open source so we
+    could explore it even deeper.
+
+Conclusion
+----------
+
+You can make animations with the ATmega32u4 but you'll need to do some
+assembly.
