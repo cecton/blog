@@ -167,7 +167,7 @@ fn main() -> ! {
             if let Err(err) = i2c.write(address, &data[..i]) {
                 ufmt::uwriteln!(&mut serial, "Error: {:?}", err).void_unwrap();
             }
-            delay.delay_ms(1000u16);
+            delay.delay_ms(1000u16); // some delay so we have the time to see the frame
             led_rx.toggle().void_unwrap();
         }};
     }
@@ -239,8 +239,8 @@ fn main() -> ! {
     instructions to access only one address space. This address space is the
     memory (RAM). People sometimes call the single address space model
     "[Von Neumann architecture](https://en.wikipedia.org/wiki/Von_Neumann_architecture)"
-    or "Princeton architecture" but this not 100% accurate has they really
-    refer to if there are separate memories or not, not wheter they have a
+    or "Princeton architecture" but this not 100% accurate, as they really
+    refer to whether there are separate memories, not whether they have a
     single address space.
 
     Here on the [AVR](https://en.wikipedia.org/wiki/AVR_microcontrollers)
@@ -251,7 +251,7 @@ fn main() -> ! {
     that AVR has "two address spaces". For example the address 1234 in flash
     memory also exists in SRAM. People sometimes call the separate model
     "[Harvard architecture](https://en.wikipedia.org/wiki/Harvard_architecture)".
-    The SRAM is normally use for stack and heap memory during the execution.
+    The SRAM is normally used for stack and heap memory during the execution.
 
     Ideally we want to only load what we need to our SRAM, for instance one
     frame at a time, the rest should stay in flash memory. AVR actually has
@@ -272,7 +272,7 @@ fn main() -> ! {
     [RISC-V board](https://www.sparkfun.com/products/15799)
     which is much more powerful (16kB data SRAM!).
     [RISC-V](https://en.wikipedia.org/wiki/RISC-V)
-    is also particularly interesting because it is entirely open source so we
+    is also particularly interesting because it is an entirely open source instruction set,  so we
     could explore it even deeper.
 
 Conclusion
