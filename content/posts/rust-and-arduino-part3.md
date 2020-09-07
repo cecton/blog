@@ -196,7 +196,7 @@ fn main() -> ! {
 
 1.  *I have this error.*
 
-    ```
+    ```text
     error: couldn't read boards/arduino-leonardo/examples/F501-15.raw: No such file or directory (os error 2)
       --> boards/arduino-leonardo/examples/leonardo-i2cdetect.rs:21:25
        |
