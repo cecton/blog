@@ -431,3 +431,6 @@ way around). This can be changed using the command: `0xa0 0x51`.
 This code could also be optimized by calling the minimum amount of time the
 `write` method. The memory is limited so I personally used 2049 and called 4
 times the `write` method to fill up the screen.
+
+You can now adventure to the [part 3]({{< ref "rust-and-arduino-part3" >}}),
+and learn how to actually make an animation on the screen.
