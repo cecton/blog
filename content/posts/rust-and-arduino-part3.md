@@ -215,7 +215,8 @@ fn main() -> ! {
 2.  *I think the first 6 frames show up correctly but the 7th is glitched and
     all the rest is glitched.*
 
-    No panic, this is expected for this example.
+    No panic, this is expected for this example. And this is the most important
+    part of this part of the blog post.
 
     The reason why it is glitched is because we have a "stack corruption". In
     other words: the
@@ -228,16 +229,16 @@ fn main() -> ! {
     I personally thought that
     [using `const` instead of `static`](https://doc.rust-lang.org/1.20.0/book/first-edition/const-and-static.html#static)
     would help with the allocations because `consts` are actually inlined so I
-    would have expected that the allocation would be only at the place it is
-    used and it would be freed when leaving the scope of the block but this is
-    not how it works.
+    would have expected that the allocation would happen only at the place it
+    is used and it would be freed when leaving the scope of the block but this
+    is not how it works.
 
     On an x86 architecture the programs are actually loaded entirely into
     memory before being executed. Because the consts are part of the program,
     they are normally loaded into memory with the rest of the code. We say that
-    x86 (and ARM) has "one address space". It means that the assembly code provides
-    instructions to access only one address space. This address space is the
-    memory (RAM). People sometimes call the single address space model
+    x86 (and ARM) has "one address space". It means that the assembly code
+    provides instructions to access only one address space. This address space
+    is the memory (RAM). People sometimes call the single address space model
     "[Von Neumann architecture](https://en.wikipedia.org/wiki/Von_Neumann_architecture)"
     or "Princeton architecture" but this not 100% accurate, as they really
     refer to whether there are separate memories, not whether they have a
@@ -272,8 +273,8 @@ fn main() -> ! {
     [RISC-V board](https://www.sparkfun.com/products/15799)
     which is much more powerful (16kB data SRAM!).
     [RISC-V](https://en.wikipedia.org/wiki/RISC-V)
-    is also particularly interesting because it is an entirely open source instruction set,  so we
-    could explore it even deeper.
+    is also particularly interesting because it is an entirely open source
+    instruction set, so we could explore it even deeper.
 
 Conclusion
 ----------
