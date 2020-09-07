@@ -216,7 +216,7 @@ fn main() -> ! {
     all the rest is glitched.*
 
     No panic, this is expected for this example. And this is the most important
-    part of this part of the blog post.
+    part of this blog post.
 
     The reason why it is glitched is because we have a "stack corruption". In
     other words: the
