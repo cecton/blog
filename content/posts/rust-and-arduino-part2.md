@@ -162,6 +162,49 @@ Read direction test:
 It is also possible that the cables of the serial moved a bit. Give it a few
 tries.
 
+#### Why is the test result crashing/incomplete
+
+This section of the post has been added later on to explain why the table of
+the "read direction test" when the screen is connected is not complete.
+
+I asked around and [@Rahix](https://blog.rahix.de/) told me that it's probably
+due to a design flaw in I2C.
+
+> Essentially, the problem is that I2C does not have a dedicated operation for
+> probing addresses. Instead, i2cdetect implementations attempt to read from
+> each address / write to each address and whenever a slave device responds
+> with ACK, it knows something is connected at that address. However, some
+> devices can't deal with random reads (e.g. some write-only devices) or writes
+> (e.g. because the device interprets the written value) and enter a weird
+> state where they lock up the bus. Most likely, that's why it's hanging for
+> you ...
+
+In the Linux man page it even comes with a warning:
+
+> WARNING
+>
+>         This program can confuse your I2C bus, cause data loss and worse!
+
+And this
+[excerpt from the source](https://git.kernel.org/pub/scm/utils/i2c-tools/i2c-tools.git/tree/tools/i2cdetect.c#n100):
+
+```c
+/* Probe this address */
+switch (cmd) {
+default: /* MODE_QUICK */
+  /* This is known to corrupt the Atmel AT24RF08
+     EEPROM */
+  res = i2c_smbus_write_quick(file,
+        I2C_SMBUS_WRITE);
+  break;
+case MODE_READ:
+  /* This is known to lock SMBus on various
+     write-only chips (mainly clock chips) */
+  res = i2c_smbus_read_byte(file);
+  break;
+}
+```
+
 ### Ping the screen
 
 If you take the example of blinking a led and mix it with the example of using
