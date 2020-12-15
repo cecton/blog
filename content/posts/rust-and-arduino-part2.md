@@ -181,9 +181,7 @@ due to a design flaw in I2C.
 
 In the Linux man page it even comes with a warning:
 
-> WARNING
->
->         This program can confuse your I2C bus, cause data loss and worse!
+> WARNING: This program can confuse your I2C bus, cause data loss and worse!
 
 And this
 [excerpt from the source](https://git.kernel.org/pub/scm/utils/i2c-tools/i2c-tools.git/tree/tools/i2cdetect.c#n100):
