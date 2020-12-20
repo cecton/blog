@@ -265,6 +265,7 @@ fn main() -> ! {
 
     // Configure clocks
     // NOTE: this screen https://www.sparkfun.com/products/15890 goes up to 320MHz
+    // NOTE: watch out because it gets really warm!
     let clocks = hifive1::clock::configure(p.PRCI, p.AONCLK, 100.mhz().into());
 
     // Configure UART for stdout
@@ -394,7 +395,8 @@ Implementation notes
 
 I didn't use a macro this time but a closure instead. The difference between
 the two is that macros actually add code at the place where you invoke them.
-You can see the generated code of a macro by using
+Thus adding a lot of duplicated code. You can see the generated code of a macro
+by using
 [cargo-expand](https://crates.io/crates/cargo-expand). This is a very handy
 tool if you work with macros.
 
