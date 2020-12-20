@@ -91,6 +91,71 @@ a blue led between IO23 and SPI MOSI. You can always check if the code builds
 by using `cargo check`. In this case, use `cargo check --example leds_blink`
 to check that the example builds.
 
+```rust
+#![no_std]
+#![no_main]
+
+/*
+* Basic blinking LEDs example using mtime/mtimecmp registers
+* for "sleep" in a loop. Blinks each led once and goes to the next one.
+*/
+
+extern crate panic_halt;
+
+use hifive1::hal::delay::Sleep;
+use hifive1::hal::prelude::*;
+use hifive1::hal::DeviceResources;
+use hifive1::sprintln;
+use hifive1::{pin, pins, Led};
+use riscv_rt::entry;
+
+#[entry]
+fn main() -> ! {
+    let dr = DeviceResources::take().unwrap();
+    let p = dr.peripherals;
+    let pins = dr.pins;
+
+    // Configure clocks
+    let clocks = hifive1::clock::configure(p.PRCI, p.AONCLK, 320.mhz().into());
+
+    // Configure UART for stdout
+    hifive1::stdout::configure(
+        p.UART0,
+        pin!(pins, uart0_tx),
+        pin!(pins, uart0_rx),
+        115_200.bps(),
+        clocks,
+    );
+
+    // get all 3 led pins in a tuple (each pin is it's own type here)
+    let rgb_pins = pins!(pins, (spi0_sck));
+    let mut blue = rgb_pins.into_inverted_output();
+
+    // get the local interrupts struct
+    let clint = dr.core_peripherals.clint;
+
+    let mut led_status = true;
+
+    // get the sleep struct
+    let mut sleep = Sleep::new(clint.mtimecmp, clocks);
+
+    sprintln!("Starting blink loop");
+
+    loop {
+        match led_status {
+            true => blue.set_high().unwrap(),
+            false => blue.set_low().unwrap(),
+        }
+
+        led_status = !led_status;
+
+        sprintln!("Status: {}", led_status);
+
+        sleep.delay_ms(200_u32);
+    }
+}
+```
+
 If the check is working you can now use one of those methods to upload the new
 firmware:
 
@@ -99,7 +164,7 @@ firmware:
     You will need to run multiple terminal for this because the GDB server
     needs to keep running in the background. In one terminal you need to run:
 
-    ```
+    ```text
     sudo JLinkGDBServer -device FE310 -if JTAG -speed 4000 -port 3333 -nogui
     ```
 
@@ -110,7 +175,7 @@ firmware:
 
     Then you can run in another terminal:
 
-    ```
+    ```text
     cargo run --example leds_blink
     ```
 
@@ -121,16 +186,15 @@ firmware:
 
     You first need to build the program:
 
-    ```
+    ```text
     cargo build --example leds_blink
     ```
 
-    Then press the button on the board to enter flash mode. A new "USB disk"
-    will appear. Mount it.
+    When you connect the device in USB you should see a new disk, mount it.
 
     Now you can generate the hex file from the binary using this command:
 
-    ```
+    ```text
     objcopy -S -j .text -j .rodata -O ihex \
         ./target/riscv32imac-unknown-none-elf/debug/examples/leds_blink \
         /media/your_device/leds_blink.hex
@@ -138,3 +202,205 @@ firmware:
 
     Unmount. It should reboot automatically on the new firmware and you should
     see the led blinking.
+
+You can also observe the logs through a serial USB. Check `/dev/ttyACM0`.
+Example using [serial-monitor](https://crates.io/crates/serial-monitor):
+
+```text
+serial-monitor -p /dev/ttyACM0 -b 115200
+```
+
+Make an animation on the screen
+-------------------------------
+
+If you followed the previous tutorial
+["Rust, Arduino and Embedded Development as a Beginner: Part 1"]({{< ref "rust-and-arduino-part1" >}})
+this should be quite straightforward.
+
+You will need the animation frame we have generated in
+["Rust, Arduino and Embedded Development as a Beginner: Part 3"]({{< ref "rust-and-arduino-part3" >}}).
+Copy the RAW files to the `src/` directory.
+
+Make sure yo use nightly:
+
+```text
+rustup override set nightly
+```
+
+Now in the file `src/main.rs`:
+
+```rust
+#![no_std]
+#![no_main]
+
+extern crate panic_halt;
+
+use hifive1::hal::i2c::{I2c, Speed};
+use hifive1::hal::prelude::*;
+use hifive1::hal::DeviceResources;
+use hifive1::{pin, sprintln};
+use riscv_rt::entry;
+
+const FRAME_1: &[u8] = include_bytes!("F501-1.raw");
+const FRAME_2: &[u8] = include_bytes!("F501-2.raw");
+const FRAME_3: &[u8] = include_bytes!("F501-3.raw");
+const FRAME_4: &[u8] = include_bytes!("F501-4.raw");
+const FRAME_5: &[u8] = include_bytes!("F501-5.raw");
+const FRAME_6: &[u8] = include_bytes!("F501-6.raw");
+const FRAME_7: &[u8] = include_bytes!("F501-7.raw");
+const FRAME_8: &[u8] = include_bytes!("F501-8.raw");
+const FRAME_9: &[u8] = include_bytes!("F501-9.raw");
+const FRAME_10: &[u8] = include_bytes!("F501-10.raw");
+const FRAME_11: &[u8] = include_bytes!("F501-11.raw");
+const FRAME_12: &[u8] = include_bytes!("F501-12.raw");
+const FRAME_13: &[u8] = include_bytes!("F501-13.raw");
+const FRAME_14: &[u8] = include_bytes!("F501-14.raw");
+const FRAME_15: &[u8] = include_bytes!("F501-15.raw");
+
+#[entry]
+fn main() -> ! {
+    let dr = DeviceResources::take().unwrap();
+    let p = dr.peripherals;
+    let pins = dr.pins;
+
+    // Configure clocks
+    // NOTE: this screen https://www.sparkfun.com/products/15890 goes up to 320MHz
+    let clocks = hifive1::clock::configure(p.PRCI, p.AONCLK, 100.mhz().into());
+
+    // Configure UART for stdout
+    hifive1::stdout::configure(
+        p.UART0,
+        pin!(pins, uart0_tx),
+        pin!(pins, uart0_rx),
+        115_200.bps(),
+        clocks,
+    );
+
+    // Configure I2C
+    let sda = pin!(pins, i2c0_sda).into_iof0();
+    let scl = pin!(pins, i2c0_scl).into_iof0();
+    let mut i2c = I2c::new(p.I2C0, sda, scl, Speed::Fast, clocks);
+
+    // Get blue led
+    let sck = pin!(pins, spi0_sck);
+    let mut blue = sck.into_inverted_output();
+
+    let address = 0b0111100; // replace this by the address of your device
+
+    // a small macro to help us send commands without repeating ourselves too much
+    macro_rules! write_cmd {
+        ($($bytes:expr),+) => {{
+            if let Err(err) = i2c.write(address, &[0b00000000, $($bytes),+]) {
+                sprintln!("Error: {:?}", err);
+            }
+        }};
+    }
+
+    // turn on the screen
+    write_cmd!(0xae);
+    write_cmd!(0xaf);
+    write_cmd!(0xa0, 0x51);
+
+    // fill the screen
+    // our screen is 128 pixels long but we divide by 2 because there are 2 pixels per byte
+    write_cmd!(0x15, 0, 63);
+    // our screen is 128 pixels height
+    write_cmd!(0x75, 0, 127);
+    // note that I reduced the buffer size!!
+    let mut data = [0x00; 1024 + 1];
+    data[0] = 0b01000000; // the control byte
+    for _ in 0..8 {
+        if let Err(err) = i2c.write(address, &data) {
+            sprintln!("Error: {:?}", err);
+        }
+    }
+
+    // dimensions of the frames
+    let width = 40;
+    let height = 42;
+
+    // prepare drawing area
+    write_cmd!(0x15, 0, width / 2 - 1);
+    write_cmd!(0x75, 0, height - 1);
+
+    // we override the first data byte with the control byte which tells the screen we are
+    // sending data
+    //
+    // note: it was done already before but just want to make sure in case you comment the screen
+    // filling above
+    data[0] = 0b01000000;
+
+    // a helper to help us draw an image
+    let mut draw_frame = |frame: &[u8]| {
+        // an iterator that will convert the frame's bytes to data bytes usable by the screen:
+        //
+        // every byte sent to the screen draws 2 pixels: the first 4 bits are for the first
+        // pixel while the last 4 bits are for the second pixel
+        //
+        // every byte in the frame contains 8 bits so 8 monochromatic pixels
+        //
+        // 8 / 2 = 4
+        //
+        // this iterator returns 4 data bytes for 1 frame byte
+        let mut chunks = frame.iter().map(|x| {
+            [
+                (x & 0b10000000).count_ones() as u8 * 0b11110000
+                    + (x & 0b01000000).count_ones() as u8 * 0b00001111,
+                (x & 0b00100000).count_ones() as u8 * 0b11110000
+                    + (x & 0b00010000).count_ones() as u8 * 0b00001111,
+                (x & 0b00001000).count_ones() as u8 * 0b11110000
+                    + (x & 0b00000100).count_ones() as u8 * 0b00001111,
+                (x & 0b00000010).count_ones() as u8 * 0b11110000
+                    + (x & 0b00000001).count_ones() as u8 * 0b00001111,
+            ]
+        });
+        // we count the number of bytes that have been copied so we don't send the whole buffer
+        let mut i = 1;
+        while let Some(chunk) = chunks.next() {
+            // copy_from_slice requires that the source slice and the destination slice are
+            // exactly the same otherwise it will panic
+            data[i..(i + 4)].copy_from_slice(&chunk);
+            i += 4;
+        }
+
+        if let Err(err) = i2c.write(address, &data[..i]) {
+            sprintln!("Error: {:?}", err);
+        }
+        let _ = blue.toggle();
+    };
+
+    loop {
+        draw_frame(FRAME_1);
+        draw_frame(FRAME_2);
+        draw_frame(FRAME_3);
+        draw_frame(FRAME_4);
+        draw_frame(FRAME_5);
+        draw_frame(FRAME_6);
+        draw_frame(FRAME_7);
+        draw_frame(FRAME_8);
+        draw_frame(FRAME_9);
+        draw_frame(FRAME_10);
+        draw_frame(FRAME_11);
+        draw_frame(FRAME_12);
+        draw_frame(FRAME_13);
+        draw_frame(FRAME_14);
+        draw_frame(FRAME_15);
+    }
+}
+```
+
+Implementation notes
+--------------------
+
+I didn't use a macro this time but a closure instead. The difference between
+the two is that macros actually add code at the place where you invoke them.
+You can see the generated code of a macro by using
+[cargo-expand](https://crates.io/crates/cargo-expand). This is a very handy
+tool if you work with macros.
+
+My idea was that if I don't do a function call, it might be slightly faster.
+But it turns out that it was quite the opposite here because the FE310-G002 CPU
+has an instruction cache which can overflow if you have too many instructions
+in your loop, thus forcing the CPU to load the instructions from flash memory
+instead (which is slow). In this case it was a lot slower if `draw_frame` was a
+macro.
