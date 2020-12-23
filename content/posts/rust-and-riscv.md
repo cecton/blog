@@ -159,7 +159,7 @@ fn main() -> ! {
 If the check is working you can now use one of those methods to upload the new
 firmware:
 
-1.  Using J-Link GDB Server
+ *  **Method 1:** Using J-Link GDB Server
 
     You will need to run multiple terminal for this because the GDB server
     needs to keep running in the background. In one terminal you need to run:
@@ -182,26 +182,27 @@ firmware:
     The two programs will interact and load the new firmware. You should see
     the led blinking.
 
-2.  By copying the hex file.
+ *  **Method 2:** By copying the hex file.
 
-    First, you need to build the program:
+    1.  First, you need to build the program:
 
-    ```text
-    cargo build --example leds_blink
-    ```
+        ```text
+        cargo build --example leds_blink
+        ```
 
-    When you connect the device in USB you should see a new disk, mount it.
+    2.  Now you can connect the device in USB and you should see a new disk,
+        mount it.
 
-    Now you can generate the hex file from the binary using this command:
+    3.  Then generate the hex file from the binary using this command:
 
-    ```text
-    objcopy -S -j .text -j .rodata -O ihex \
-        ./target/riscv32imac-unknown-none-elf/debug/examples/leds_blink \
-        /media/your_device/leds_blink.hex
-    ```
+        ```text
+        objcopy -S -j .text -j .rodata -O ihex \
+            ./target/riscv32imac-unknown-none-elf/debug/examples/leds_blink \
+            /media/your_device/leds_blink.hex
+        ```
 
-    Unmount. It should reboot automatically on the new firmware and you should
-    see the led blinking.
+    4.  Unmount. It should reboot automatically on the new firmware and you
+        should see the led blinking.
 
 You can also observe the logs through a serial USB. Check `/dev/ttyACM0`.
 Example using [serial-monitor](https://crates.io/crates/serial-monitor):
