@@ -405,4 +405,4 @@ But it turns out that it was quite the opposite here because the FE310-G002 CPU
 has an instruction cache which can overflow if you have too many instructions
 in your loop, thus forcing the CPU to load the instructions from flash memory
 instead (which is slow). In this case the macro version of `draw_frame` was a
-macro.
+a lot slower.
