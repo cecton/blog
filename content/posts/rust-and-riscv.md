@@ -286,7 +286,9 @@ fn main() -> ! {
     let sck = pin!(pins, spi0_sck);
     let mut blue = sck.into_inverted_output();
 
-    let address = 0b0111100; // replace this by the address of your device
+    // This is the the address of your device. You can find it in the data sheets of
+    // your device.
+    let address = 0b0111100;
 
     // a small macro to help us send commands without repeating ourselves too much
     macro_rules! write_cmd {
