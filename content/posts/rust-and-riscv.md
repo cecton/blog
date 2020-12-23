@@ -13,30 +13,30 @@ Introduction
 After my experience with the AVR microchip family (the same you use on Arduino
 boards) I decided to try out Rust on a RISC-V based board. I don't work in
 embedded development but most of the professional projects I saw were using
-either AVR either ARM-based architecture. As I understand the reason for that
+either AVR or ARM-based architectures. As I understand the reason for that
 is because they are kinda industry standards and you can find PCB assemblers
-who provides AVR and ARM chips more easily. RISC-V on the other hand is
+who provide AVR and ARM chips more easily. RISC-V on the other hand is
 relatively new (2010 according to
-[Wikipedia](https://en.wikipedia.org/wiki/RISC-V)) but is entirely open source
-which doesn't require fees to use it.
+[Wikipedia](https://en.wikipedia.org/wiki/RISC-V)) and is entirely open source.
+Unlike other instruction sets, RISC-V has no license fees attached to it.
 
 I had the chance to test two different
 chip producers for RISC-V: [SiFive](https://en.wikipedia.org/wiki/SiFive)
-(which actually outsource the actual manufacturing) and
+(which outsource the actual manufacturing) and
 [GigaDevice](https://en.wikipedia.org/wiki/GigaDevice). SiFive is what you will
 see on the most common development boards like the HiFive boards. In this
 article I'm using the
 [RED-V Thing Plus](https://www.sparkfun.com/products/15799) from SparkFun which
 has the same MCU than the
 [HiFive 1 Rev B](https://www.sifive.com/boards/hifive1-rev-b). One of the main
-advantage of the RED-V is again the
-[Qwiic connector](https://www.sparkfun.com/qwiic) that I use in the previous
+advantage of the RED-V is the
+[Qwiic connector](https://www.sparkfun.com/qwiic) that I used in the previous
 article ["Rust, Arduino and Embedded Development as a Beginner: Part 1"]({{< ref "rust-and-arduino-part1" >}}).
 This allows us to connect the exact same screen
 ([Zio Qwiic OLED Display (1.5inch, 128x128)](https://www.sparkfun.com/products/15890))
-to the board and get started very qwiickly. It is worth mentioning that the
-advantage of the Qwiic connector is how easily and safely you can connect
-components together but not the transfer speed of the data: connection through
+to the board and get started very qwiickly. It is worth mentioning that while
+the Qwiic connector makes it easy and safe to connect
+components together, it is not fast: connection through
 serial is faster. In this tutorial, we are going to push this I2C to its
 limits thanks to the very powerful FE310 microchip.
 
@@ -51,8 +51,8 @@ limits thanks to the very powerful FE310 microchip.
 First step: making sure everything works
 ----------------------------------------
 
-I assume that the screen is working because I already made it working in the
-previous tutorial with the AVR. All we need to do now is making sure that the
+I assume that the screen is working because I already made it work in the
+previous tutorial with the AVR. All we need to do now is make sure that the
 board itself is working by making a led blink. In this tutorial I'm not going
 to go through installing the IDE as suggested by the
 [SparkFun's RED-V development guide](https://learn.sparkfun.com/tutorials/red-v-development-guide)
@@ -171,7 +171,7 @@ firmware:
     (You might not need `sudo` if you have set up user permissions to the
     device).
 
-    The program should keeps waiting if it detected the device properly.
+    The program should keep waiting if it detected the device properly.
 
     Then you can run in another terminal:
 
@@ -184,7 +184,7 @@ firmware:
 
 2.  By copying the hex file.
 
-    You first need to build the program:
+    First, you need to build the program:
 
     ```text
     cargo build --example leds_blink
@@ -221,7 +221,7 @@ You will need the animation frame we have generated in
 ["Rust, Arduino and Embedded Development as a Beginner: Part 3"]({{< ref "rust-and-arduino-part3" >}}).
 Copy the RAW files to the `src/` directory.
 
-Make sure yo use nightly:
+For the example, we are using nightly features, so make sure you tell rustup to use it:
 
 ```text
 rustup override set nightly
@@ -404,5 +404,5 @@ My idea was that if I don't do a function call, it might be slightly faster.
 But it turns out that it was quite the opposite here because the FE310-G002 CPU
 has an instruction cache which can overflow if you have too many instructions
 in your loop, thus forcing the CPU to load the instructions from flash memory
-instead (which is slow). In this case it was a lot slower if `draw_frame` was a
+instead (which is slow). In this case the macro version of `draw_frame` was a
 macro.
