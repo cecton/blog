@@ -396,16 +396,66 @@ fn main() -> ! {
 Implementation notes
 --------------------
 
-I didn't use a macro this time but a closure instead. The difference between
-the two is that macros actually add code at the place where you invoke them.
-Thus adding a lot of duplicated code. You can see the generated code of a macro
-by using
-[cargo-expand](https://crates.io/crates/cargo-expand). This is a very handy
-tool if you work with macros.
+In
+["Rust, Arduino and Embedded Development as a Beginner: Part 3"]({{< ref "rust-and-arduino-part3" >}})
+we used a macro to draw every frame. We could have done it using a function or
+a closure but that would mean that when the code is compiled to assembly, there
+will be jumps to this function/closure. I wanted to optimize the best I could
+so I used a macro instead.
 
-My idea was that if I don't do a function call, it might be slightly faster.
-But it turns out that it was quite the opposite here because the FE310-G002 CPU
-has an instruction cache which can overflow if you have too many instructions
-in your loop, thus forcing the CPU to load the instructions from flash memory
-instead (which is slow). In this case the macro version of `draw_frame` was a
-a lot slower.
+A macro literally add code to your code before it gets compiled. So for
+example, if you do:
+
+```rust
+macro_rules hello_world {
+    () => {{
+        println!("Hello World!");
+    }};
+}
+
+hello_world!();
+hello_world!();
+hello_world!();
+```
+
+This code will be equivalent to:
+
+```rust
+println!("Hello World!");
+println!("Hello World!");
+println!("Hello World!");
+```
+
+If, instead, you use a function, the code will look like this:
+
+```rust
+fn hello_world() {
+    println!("Hello World!"); // this code exists only once
+}
+
+hello_world(); // jump to hello_world
+hello_world(); // jump to hello_world
+hello_world(); // jump to hello_world
+```
+
+You can see the generated code of a macro by using
+[cargo-expand](https://crates.io/crates/cargo-expand). This is a very handy
+tool if you work with macros and want to see what's going on.
+
+You can read more about the cost of a jump
+[here](https://stackoverflow.com/questions/5127833/meaningful-cost-of-the-jump-instruction).
+On a normal CPU it would be ridiculous to do but on the ATmega I thought (I
+might be wrong) that it could have a bigger impact. My intent was to make it as
+fast as possible.
+
+In this example with RISC-V I decided to not use a macro this time but a
+closure instead. My intent is still to make it as fast as possible but there is
+a little detail you need to know about the FE310-G002: this MCU has an
+instruction cache which can overflow if you have too many instructions in your
+loop, thus making cache miss and forcing the MCU to load the instructions from
+flash memory instead (which is slower than the cache). In this particular case
+the macro version of `draw_frame` was a lot slower than the closure.
+
+We didn't have this issue with the ATmega because there is no MCU cache, it
+just loads everything from flash. On modern CPUs the entire program is loaded
+into memory and there is a much bigger CPU cache.
