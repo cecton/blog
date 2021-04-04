@@ -218,7 +218,7 @@ this you will need one of these 2 crates:
 
  -  if you are building a binary: [`anyhow`](https://crates.io/crates/anyhow);
  -  if you are building a library:
-    [`thiserror`](https://crates.io/crates/thiserror);
+    [`thiserror`](https://crates.io/crates/thiserror).
 
 Let's focus on using `anyhow` for now as it is the easiest to understand.
 `anyhow` provides its own `Result`, a trait `Context` and a `bail!()` macro.
