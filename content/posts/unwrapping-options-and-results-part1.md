@@ -43,10 +43,11 @@ let     wrapped_value   : Option<u64>       = None;
 Handling a Wrapper Type
 -----------------------
 
-The point of using a wrapper type is to enforce the developer to handle the
-wrapper type. Since the value is wrapped in an `Option`, the only way to get
-the value back is to handle the case were the `Option` is `Some` and when it is
-`None`. This is usually done using `match` or `if let`. Example with `match`:
+The point of using a wrapper type is to force the developer to handle all
+cases, including the failing ones. Since the value is wrapped in an `Option`,
+the only way to get the value back is to handle the case were the `Option`'s
+variant is `Some` and when it is `None`. This is usually done using `match` or
+`if let`. Example with `match`:
 
 ```rust
 //      variable name     type                value
