@@ -15,8 +15,8 @@ you should be able to appreciate and love it.
 The Wrapper Type
 ----------------
 
-`Result` and `Option` are types that wraps a value. For example, a value of
-type `u64` can be wrapped in an option:
+`Result` and `Option` are types that wrap a value. For example, a value of
+type `u64` can be wrapped in an `Option`:
 
 ```rust
 //      variable name     type                value
