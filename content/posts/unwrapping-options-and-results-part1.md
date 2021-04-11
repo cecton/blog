@@ -25,9 +25,11 @@ let     value           : u64               = 42;
 let     wrapped_value   : Option<u64>       = Some(value);
 ```
 
-In the case of option there are actually 2 variants: `Option::Some` and
-`Option::None`. They are both in the "std prelude", this means you can just
-write `Some` or `None` instead.
+In the case of `Option`:
+ -  There are 2 variants: `Option::Some` and `Option::None`. They are both in
+    the "std prelude", this means you can just write `Some` or `None` instead.
+ -  There is only one type argument: the type of the inner value. (`u64` in
+    this example).
 
 Only the variant `Some` is able to hold a value. The variant `None` means "no
 value". Because of that, you can actually use a wrapper type that will never
@@ -187,15 +189,17 @@ fn is_running(wrapped_status: Option<String>) -> bool {
 Handling Result Like a Boss
 ---------------------------
 
-`Result` is a kind of wrapper type that actually has 2 types: one for its value
-(just like `Option`) called `Result::Ok` and one for its error called
-`Result::Err`. Just like `Option`, the `Result` variants are directly
-accessible because they are in the "std prelude". Because of that, you can
-directly write `Ok` and `Err`.
+`Result` is a different beast:
+ -  Just like `Option` it has 2 variants: `Result::Ok` and `Result::Err`. They
+    also are directly accessible because they are in the "std prelude". (So
+    you can write directly `Ok` and `Err`.)
+ -  But it has 2 type arguments: one for its value used in the `Result::Ok`
+    variant (which is similar to `Option::Some`) and another one used for its
+    error called `Result::Err`.
 
 Because the error case has a type, `Result` are harder to handle than `Option`.
-This is because the error type must be compatible. For example, the following
-code won't compile:
+This is because the error type must be the same if you want to chain things
+with `Result`. For example, the following code won't compile:
 
 ```rust
 //      variable name     type                value
