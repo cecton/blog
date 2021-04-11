@@ -8,9 +8,10 @@ Synopsis
 In Rust you don't handle errors through `try...catch/except` but through a
 special type called a `Result`. You also don't handle out of bound indexing
 (like `my_list[3]` where `my_list` has only 2 items) through defensive
-programming but through `Option`. This blog post is for people who want to
-know how and why Rust is forcing you to use this pattern. After reading this
-you should be able to appreciate and love it.
+programming but through `Option` (although: you *can* but it's not the best
+way). This blog post is for people who want to know how and why Rust is
+forcing you to use this pattern. After reading this you should be able to
+appreciate and love it.
 
 The Wrapper Type
 ----------------
