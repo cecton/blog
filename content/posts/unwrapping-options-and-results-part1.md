@@ -235,7 +235,7 @@ the error to an `anyhow` error, thus making it compatible.
 
 Finally the `bail()` macro is handy when you want to return immediately an
 error. This is kinda like `return Err(...)`. We will talk about it in the next
-part of this blog post serie.
+part of this blog post series.
 
 Let's now fix our previous example using `anyhow`:
 
