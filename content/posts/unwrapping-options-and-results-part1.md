@@ -22,8 +22,8 @@ type `u64` can be wrapped in an `Option`:
 ```rust
 //      variable name     type                value
 //
-let     value           : u64               = 42;
-let     wrapped_value   : Option<u64>       = Some(value);
+let     my_value        : u64               = 42;
+let     wrapped_value   : Option<u64>       = Some(my_value);
 ```
 
 In the case of `Option`
@@ -56,20 +56,12 @@ variant is `Some` and when it is `None`. This is usually done using `match` or
 ```rust
 //      variable name     type                value
 //
-let     value           : u64               = 42;
-let     wrapped_value   : Option<u64>       = Some(value);
+let     my_value        : u64               = 42;
+let     wrapped_value   : Option<u64>       = Some(my_value);
 
 match wrapped_value {
-    Some(value) => {
-
-        // This `let` is just here for the reader to understand that the value
-        // is actually an `u64` now.
-        //
-        //      variable name     type                value
-        //
-        let     my_value        : u64               = value;
-
-        println!("The value is: {}", my_value);
+    Some(inner_value) => {
+        println!("The value is: {}", inner_value);
     }
     None => {
         println!("No value")
@@ -83,12 +75,12 @@ Example with `unwrap`:
 ```rust
 //      variable name     type                value
 //
-let     value           : u64               = 42;
-let     wrapped_value   : Option<u64>       = Some(value);
+let     my_value        : u64               = 42;
+let     wrapped_value   : Option<u64>       = Some(my_value);
 
 // We can "unwrap" `Option<u64>` to `u64` using the method `.unwrap()`:
-let     value_back      : u64               = wrapped_value.unwrap();
-println!("The value is: {}", value_back);
+let     my_value_back      : u64               = wrapped_value.unwrap();
+println!("The value is: {}", my_value_back);
 ```
 
 Both codes do the same but the difference is that one actually handles the case
@@ -104,8 +96,8 @@ compile:
 ```rust
 //      variable name     type                value
 //
-let     value           : u64               = 42;
-let     wrapped_value   : Option<u64>       = Some(value);
+let     my_value        : u64               = 42;
+let     wrapped_value   : Option<u64>       = Some(my_value);
 
 // Crashes with something like "`Display` is not implemented for
 // `Option<u64>`".
@@ -147,14 +139,14 @@ transform an `Option<u64>` to an `Option<String>` using `.map()`:
 ```rust
 //      variable name     type                value
 //
-let     value           : u64               = 42;
-let     wrapped_value   : Option<u64>       = Some(value);
+let     my_value        : u64               = 42;
+let     wrapped_value   : Option<u64>       = Some(my_value);
 
 // `.map()` takes a closure that has, in this case:
 //  -  in input: `u64`
 //  -  in output: `String`
 let     transformed     : Option<String>    =
-    wrapped_value.map(|value| value.to_string());
+    wrapped_value.map(|inner_value| inner_value.to_string());
 ```
 
 But you can also make transformations that will get rid of the wrapper type.
@@ -216,7 +208,7 @@ let     input           : Vec<u8>           = vec![52, 50];
 //  -  `String::from_utf8` will return an error of type `FromUtf8Error`
 //  -  `u64::from_str_radix` will return an error of type `ParseIntError`
 //
-let     value           : Result<u64, _>    =
+let     my_value        : Result<u64, _>    =
     String::from_utf8(input)
         .and_then(|string| u64::from_str_radix(&string, 10));
 ```
@@ -258,7 +250,7 @@ let     input           : Vec<u8>           = vec![52, 50];
 
 // this code will try to read a sequence of bytes as a string and then parse
 // it to an integer
-let     value           : anyhow::Result<u64> =
+let     my_value        : anyhow::Result<u64> =
     String::from_utf8(input)
         // Transform `FromUtf8Error` to `anyhow::Error` and add a message
         .context("Cannot read byte sequence as UTF-8")
@@ -335,8 +327,8 @@ let     result          : anyhow::Result<i64>   =
         });
 
 match result {
-    Ok(value) => {
-        println!("The value is: {}", value);
+    Ok(inner_value) => {
+        println!("The value is: {}", inner_value);
     }
     Err(err) => {
         eprintln!("Error: {}", err);
