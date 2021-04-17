@@ -125,9 +125,9 @@ is out of the scope of this article but if you are curious about it you could
 check "null safety" in Swift and Kotlin.
 
 The TL;DR here is: even though it feels cumbersome, forcing the developer to
-handle exceptions (`None` and `Err` cases) is actually good for the quality of
-life. In the next section we will see how we can make it handy instead of
-cumbersome.
+handle exceptions (`None` and `Err` (introduced later in this post) cases) is
+actually good for the quality of life. In the next section we will see how we
+can make it handy instead of cumbersome.
 
 Manipulating Wrapper Types
 --------------------------
