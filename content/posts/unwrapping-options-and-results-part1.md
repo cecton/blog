@@ -61,6 +61,7 @@ let     wrapped_value   : Option<u64>       = Some(my_value);
 
 match wrapped_value {
     Some(inner_value) => {
+        // inner_value is of type u64
         println!("The value is: {}", inner_value);
     }
     None => {
