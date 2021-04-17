@@ -26,10 +26,11 @@ let     value           : u64               = 42;
 let     wrapped_value   : Option<u64>       = Some(value);
 ```
 
-In the case of `Option`:
+In the case of `Option`
+([doc](https://doc.rust-lang.org/std/option/enum.Option.html)):
  -  There are 2 variants: `Option::Some` and `Option::None`. They are both in
     the "std prelude", this means you can just write `Some` or `None` instead.
- -  There is only one type argument: the type of the inner value. (`u64` in
+ -  There is only one type argument (T): the type of the inner value. (`u64` in
     this example).
 
 Only the variant `Some` is able to hold a value. The variant `None` means "no
@@ -190,13 +191,14 @@ fn is_running(wrapped_status: Option<String>) -> bool {
 Handling Result Like a Boss
 ---------------------------
 
-`Result` is a different beast:
+`Result` is a different beast
+([doc](https://doc.rust-lang.org/std/result/enum.Result.html)):
  -  Just like `Option` it has 2 variants: `Result::Ok` and `Result::Err`. They
     also are directly accessible because they are in the "std prelude". (So
     you can write directly `Ok` and `Err`.)
- -  But it has 2 type arguments: one for its value used in the `Result::Ok`
-    variant (which is similar to `Option::Some`) and another one used for its
-    error called `Result::Err`.
+ -  But it has 2 type arguments: one (T) for its value used in the `Result::Ok`
+    variant (which is similar to `Option::Some`) and another one (E) used for
+    its error variant called `Result::Err`.
 
 Because the error case has a type, `Result` are harder to handle than `Option`.
 This is because the error type must be the same if you want to chain things
