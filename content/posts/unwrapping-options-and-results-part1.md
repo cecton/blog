@@ -118,9 +118,9 @@ will break during a Q&A testing, maybe it will break in production... Or maybe
 you wrote a test somewhere to make sure this case is handled properly. If you
 did write a test to ensure this won't break at runtime, you have effectively
 increased the number of line of codes and maintenance cost of your application.
-Which is fine if the programming language leaves you no other choice. But if it
-does, it is better to leverage what you have with the language, especially when
-this give you no runtime cost (cost in execution speed of your program).
+Which is fine if the programming language leaves you no other choice. But in
+Rust the `Option` type allows the compiler to check this for us, so we do not
+need to write tests for this.
 
 Though it is important to note that some modern languages that have a `NULL`
 handle the `NULL` case using a special marker on the type (usually `?`). This
