@@ -28,6 +28,7 @@ let     wrapped_value   : Option<u64>       = Some(my_value);
 
 In the case of `Option`
 ([doc](https://doc.rust-lang.org/std/option/enum.Option.html)):
+
  -  There are 2 variants: `Option::Some` and `Option::None`. They are both in
     the "std prelude", this means you can just write `Some` or `None` instead.
  -  There is only one type argument (T): the type of the inner value. (`u64` in
@@ -189,6 +190,7 @@ Handling Result Like a Boss
 
 `Result` is a different beast
 ([doc](https://doc.rust-lang.org/std/result/enum.Result.html)):
+
  -  Just like `Option` it has 2 variants: `Result::Ok` and `Result::Err`. They
     also are directly accessible because they are in the "std prelude". (So
     you can write directly `Ok` and `Err`.)
